@@ -1,0 +1,34 @@
+set nocompatible
+
+"Executes Pathogen, which is awesome for installing plugins
+execute pathogen#infect()
+
+syntax on "Enables syntax highlighting
+filetype plugin indent on
+:set tabstop=2 "Sets indents to 2 spaces
+:set shiftwidth=2 "Sets indents to 2 spaces
+:set expandtab "Uses spaces instead of tabs
+:set number "Shows lines numbers
+:set cursorline "Highlights current line under cursor
+:set colorcolumn=101 "Sets a visible line marker at line 100 (highlights column 101, left side=100)
+
+"Solarized theme related parameters
+set t_Co=256
+let g:solarized_termtrans=1
+set background=dark
+colorscheme solarized
+
+"Calls the function to remove trailing whitespaces on save
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+"This function removes trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+  "Save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction

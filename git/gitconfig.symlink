@@ -1,0 +1,27 @@
+[user]
+  name = Trace Helms
+  email = traceh@izea.com
+
+[credential]
+  helper = osxkeychain
+
+[core]
+  excludesfile = ~/.gitignore
+  editor = subl -w
+
+[color]
+  ui = true
+
+[apply]
+  whitespace = nowarn
+
+[mergetool]
+  keepBackup = false
+
+[alias]
+  co = checkout
+  po = pull origin
+  pso = push origin
+  cm = commit -m 
+  br = branch
+  st = status

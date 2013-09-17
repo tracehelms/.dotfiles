@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+#
+# setup gitconfig and install dotfiles
+
+DOTFILES_ROOT="`pwd`"
+
+set -e
+
+echo ''
+
+info () {
+  printf "  [ \033[00;34m..\033[0m ] $1"
+}
+
+user () {
+  printf "\r  [ \033[0;33m?\033[0m ] $1 "
+}
+
+success () {
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+fail () {
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  echo ''
+  exit
+}
+
+check_homebrew () {
+  which -s brew || fail 'homebrew required'
+}
+
+setup_osx () {
+  info 'configuring osx'
+
+  $DOTFILES_ROOT/osx/set_defaults
+
+  success 'configured osx; may require restart'
+}
+
+setup_gitconfig () {
+  if ! [ -f git/gitconfig.symlink ]
+  then
+    info 'setup gitconfig'
+
+    git_credentials='cache'
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+      git_credentials='osxkeychain'
+    fi
+
+    user ' - What is your name?'
+    read -e name
+    user ' - What is your email?'
+    read -e email
+
+    sed -e "s/GIT_USER_NAME/$name/g" -e "s/GIT_USER_EMAIL/$email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credentials/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+
+    success 'gitconfig'
+  fi
+}
+
+link_files () {
+  ln -s $1 $2
+  success "linked $1 to $2"
+}
+
+install_dotfiles () {
+  info 'installing dotfiles'
+
+  skip_all=false
+  overwrite_all=false
+  backup_all=false
+
+  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink`
+  do
+    dest="$HOME/.`basename \"${source%.*}\"`"
+
+    if [ -f $dest ] || [ -d $dest ]
+    then
+      skip=false
+      overwrite=false
+      backup=false
+
+      if [ "$skip_all" == "false" ] && [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ]
+      then
+        user "File already exists: `basename $source`, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        read -n 1 action
+
+        case "$action" in
+          s )
+            skip=true;;
+          S )
+            skip_all=true;;
+          o )
+            overwrite=true;;
+          O )
+            overwrite_all=true;;
+          b )
+            backup=true;;
+          B )
+            backup_all=true;;
+          * )
+            ;;
+        esac
+      fi
+
+      if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
+      then
+        rm -rf $dest
+        success "removed $dest"
+      fi
+
+      if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
+      then
+        mv $dest $dest\.backup
+        success "moved $dest to $dest.backup"
+      fi
+
+      if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
+      then
+        link_files $source $dest
+      else
+        success "skipped $source"
+      fi
+
+    else
+      link_files $source $dest
+    fi
+
+  done
+}
+
+setup_sublime_text () {
+  info 'configuring sublime2'
+
+  $DOTFILES_ROOT/sublime2/link_settings
+
+  success 'configured sublime2'
+}
+
+check_homebrew
+#setup_osx
+setup_gitconfig
+install_dotfiles
+#setup_sublime_text
+
+echo ''
+echo 'All installed!'
