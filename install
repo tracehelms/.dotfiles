@@ -141,7 +141,7 @@ setup_sublime_text () {
 
 check_homebrew
 #setup_osx
-setup_gitconfig
+#setup_gitconfig
 install_dotfiles
 #setup_sublime_text
 

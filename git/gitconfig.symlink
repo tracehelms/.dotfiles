@@ -7,16 +7,15 @@
 
 [core]
   excludesfile = ~/.gitignore
-  editor = subl -w
+
+[mergetool]
+  keepBackup = false
 
 [color]
   ui = true
 
 [apply]
   whitespace = nowarn
-
-[mergetool]
-  keepBackup = false
 
 [alias]
   co = checkout
@@ -25,3 +24,4 @@
   cm = commit -m 
   br = branch
   st = status
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short

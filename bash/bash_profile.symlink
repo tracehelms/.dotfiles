@@ -1,4 +1,9 @@
-export PATH=/usr/local/bin:$PATH
+# where the dotfiles are
+export DOTFILES=~/.dotfiles
+
+# add paths that should have been there by default
+export PATH="/usr/local/bin:$PATH"
+export PATH="~/.dotfiles/bin:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
@@ -7,17 +12,21 @@ fi
 # This enables colors in the base terminal, such as folder vs. file highlighting
 export CLICOLOR=1
 
-# Changes the prompt to be a little more useful
-# \d – Current date
-# \t – Current time
-# \h – Host name
-# \# – Command number
-# \u – User name
-# \W – Current working directory (ie: Desktop/)
-# \w – Current working directory, full path (ie: /Users/Admin/Desktop)
-export PS1="\w$ "
-
 # Adds a shortcut to open a file in Firefox
 firefox(){
   open -a /Applications/Firefox.app/ "$1"
 }
+# erase duplicates in history
+export HISTCONTROL=erasedups
+
+# store 10k history entries
+export HISTSIZE=10000
+
+# append to the history when exiting instead of overwriting
+shopt -s histappend
+
+# load all bash files
+for file in $DOTFILES/**/*.bash
+do
+  source $file
+done
