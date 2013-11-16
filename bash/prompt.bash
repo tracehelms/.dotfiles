@@ -33,7 +33,7 @@ git_branch (){
     # Branch dirty
     git_color=$red_fg
   fi
-  echo "${git_color}[$git_branch]"
+  echo " ${git_color}[$git_branch]"
 
 
   #echo ${prompt}
@@ -41,5 +41,5 @@ git_branch (){
 
 
 # The prompt
-export PS1="$orange_fg\w \$(git_branch) $orange_fg\$$reset_color "
+export PS1="$orange_fg\w\$(git_branch)$orange_fg\$$reset_color "
 
