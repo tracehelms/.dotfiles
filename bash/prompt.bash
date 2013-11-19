@@ -34,9 +34,6 @@ git_branch (){
     git_color=$red_fg
   fi
   echo " ${git_color}[$git_branch]"
-
-
-  #echo ${prompt}
 }
 
 
