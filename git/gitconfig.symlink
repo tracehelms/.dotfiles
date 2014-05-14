@@ -1,7 +1,3 @@
-[user]
-  name = Trace Helms
-  email = traceh@izea.com
-
 [credential]
   helper = osxkeychain
 
@@ -21,7 +17,10 @@
   co = checkout
   po = pull origin
   pso = push origin
-  cm = commit -m 
+  cm = commit -m
   br = branch
   st = status
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+[user]
+	email = ryandhertz@gmail.com
+	name = Ryan Hertz
