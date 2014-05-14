@@ -26,6 +26,14 @@ git_branch (){
 
   git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
 
+  echo "[$git_branch]"
+}
+
+get_git_color () {
+  if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    return 0
+  fi
+
   if git diff --quiet 2>/dev/null >&2; then
     # Branch clean
     git_color=$blue_fg
@@ -33,10 +41,20 @@ git_branch (){
     # Branch dirty
     git_color=$red_fg
   fi
-  echo " ${git_color}[$git_branch]"
+  echo "${git_color}"
 }
 
 
 # The prompt
-export PS1="$orange_fg\w\$(git_branch)$orange_fg\$$reset_color "
+# You have to wrap non-printing characters in \[....\] so that the cursor ends up in the right spot on new lines
+
+export PS1="\[$orange_fg\]\w \[\$(get_git_color)\]\$(git_branch)\[$orange_fg\$$reset_color\] "
+
+
+
+
+
+
+
+
 
