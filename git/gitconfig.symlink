@@ -1,12 +1,13 @@
 [user]
   name = Trace Helms
-  email = traceh@izea.com
+  email = tracehelms@gmail.com
 
 [credential]
   helper = osxkeychain
 
 [core]
   excludesfile = ~/.gitignore
+	editor = /usr/bin/vim
 
 [mergetool]
   keepBackup = false

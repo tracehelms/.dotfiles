@@ -1,18 +1,16 @@
 set nocompatible               " be iMproved
-filetype on
+let mapleader = ","
 filetype off                   " required!
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-
-Bundle 'tpope/vim-rails.git'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'scrooloose/nerdtree'
-
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+  " let Vundle manage Vundle
+  Plugin 'gmarik/Vundle.vim'
+  Plugin 'kien/ctrlp.vim'
+  Plugin 'tpope/vim-rails'
+  Plugin 'altercation/vim-colors-solarized'
+  Plugin 'kchmck/vim-coffee-script'
+  Plugin 'scrooloose/nerdtree'
+call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
 set tabstop=2 "Sets indents to 2 spaces
@@ -20,28 +18,18 @@ set shiftwidth=2 "Sets indents to 2 spaces
 set expandtab "Uses spaces instead of tabs
 set number "Shows lines numbers
 set cursorline "Highlights current line under cursor
-set colorcolumn=101 "Sets a visible line marker at line 100 (highlights column 101, left side=100)
+set ruler
+set colorcolumn=80
+set colorcolumn=110 "Sets a visible line marker at line 110 (highlights column 111, left side=110)
 set laststatus=2 "Shows the status bar even if there is only one buffer open
-set timeoutlen=20
+"set timeoutlen=20
 set backspace=2 "Allows backspacing over everything in insert mode
 
 "Solarized theme related parameters
 set t_Co=256
-let g:solarized_termtrans=1
-set background=dark
+"let g:solarized_termtrans=1
+set background=light
 colorscheme solarized
 
-"Calls the function to remove trailing whitespaces on save
-"autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-""This function removes trailing whitespace
-"function! <SID>StripTrailingWhitespaces()
-"  "Save last search, and cursor position.
-"  let _s=@/
-"  let l = line(".")
-"  let c = col(".")
-"  " Do the business:
-"  %s/\s\+$//e
-"  " Clean up: restore previous search history, and cursor position
-"  let @/=_s
-"  call cursor(l, c)
-"endfunction
+map <Leader>t :CtrlP
+
