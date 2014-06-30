@@ -1,5 +1,5 @@
 set nocompatible               " be iMproved
-let mapleader = ","
+let mapleader=','
 filetype off                   " required!
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -10,26 +10,63 @@ call vundle#begin()
   Plugin 'altercation/vim-colors-solarized'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'scrooloose/nerdtree'
+  Plugin 'vim-scripts/ctags.vim'
+  Plugin 'vim-scripts/tComment'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
+
+" Tabs
 set tabstop=2 "Sets indents to 2 spaces
 set shiftwidth=2 "Sets indents to 2 spaces
+set shiftround
 set expandtab "Uses spaces instead of tabs
+set list listchars=tab:»·,trail:· " Display extra whitespace
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+" Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+" ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" Tab completion
+" will insert tab at beginning of line,
+" will use completion if not at beginning
+set wildmode=list:longest,list:full
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+
+let g:html_indent_tags = 'li\|p' " Treat <li> and <p> tags like the block tags they are
+
 set number "Shows lines numbers
 set cursorline "Highlights current line under cursor
 set ruler
-set colorcolumn=80
 set colorcolumn=110 "Sets a visible line marker at line 110 (highlights column 111, left side=110)
 set laststatus=2 "Shows the status bar even if there is only one buffer open
-"set timeoutlen=20
+set timeoutlen=1000
+set ttimeoutlen=100
 set backspace=2 "Allows backspacing over everything in insert mode
+set lazyredraw "Makes scrolling lag not as bad
+set ttyfast "Force terminal to assume a fast connection
 
 "Solarized theme related parameters
-set t_Co=256
-"let g:solarized_termtrans=1
 set background=light
+let g:solarized_termtrans=1
 colorscheme solarized
+set t_Co=256
 
-map <Leader>t :CtrlP
+nnoremap <Leader>t :CtrlP
 
