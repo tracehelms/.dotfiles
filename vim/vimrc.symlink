@@ -1,7 +1,8 @@
 set nocompatible               " be iMproved
 let mapleader=','
 filetype off                   " required!
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
+set rtp+=$GOROOT/misc/vim
 call vundle#begin()
   " let Vundle manage Vundle
   Plugin 'gmarik/Vundle.vim'
@@ -61,12 +62,27 @@ set ttimeoutlen=100
 set backspace=2 "Allows backspacing over everything in insert mode
 set lazyredraw "Makes scrolling lag not as bad
 set ttyfast "Force terminal to assume a fast connection
+set t_Co=256
+set splitbelow
+set splitright
 
 "Solarized theme related parameters
 set background=light
 let g:solarized_termtrans=1
 colorscheme solarized
-set t_Co=256
 
 nnoremap <Leader>t :CtrlP
+nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
+nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
+nnoremap <Leader>c :TComment
+vnoremap <Leader>c :TCommentBlock
+
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+" This removes trailing whitespaces on save
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 

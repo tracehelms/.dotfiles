@@ -30,3 +30,4 @@ for file in $DOTFILES/**/*.bash
 do
   source $file
 done
+[[ -s "/Users/tracehelms/.gvm/scripts/gvm" ]] && source "/Users/tracehelms/.gvm/scripts/gvm"
