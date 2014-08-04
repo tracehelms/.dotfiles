@@ -65,6 +65,7 @@ set ttyfast "Force terminal to assume a fast connection
 set t_Co=256
 set splitbelow
 set splitright
+set re=1 " Use old regex engine, ruby syntax regexes were lagging
 
 "Solarized theme related parameters
 set background=light
@@ -72,10 +73,12 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 nnoremap <Leader>t :CtrlP
+nnoremap <Leader>tp :CtrlPTag
 nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
 nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
 nnoremap <Leader>c :TComment
-vnoremap <Leader>c :TCommentBlock
+vnoremap <Leader>c :TComment
+nnoremap <Leader>ct :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
 
 fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
@@ -85,4 +88,8 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 " This removes trailing whitespaces on save
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" Exclude Javascript files in :Rtags via rails.vim due to warnings when
+" parsing
+let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
