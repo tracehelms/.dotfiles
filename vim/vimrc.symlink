@@ -77,6 +77,8 @@ nnoremap <Leader>tp :CtrlPTag
 nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
 nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
 nnoremap <Leader>c :TComment
+nnoremap <Leader>tf :Rake " test this whole file
+nnoremap <Leader>tt :.Rake " test only this test
 vnoremap <Leader>c :TComment
 nnoremap <Leader>ct :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
 
