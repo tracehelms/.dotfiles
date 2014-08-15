@@ -66,6 +66,7 @@ set t_Co=256
 set splitbelow
 set splitright
 set re=1 " Use old regex engine, ruby syntax regexes were lagging
+set hlsearch
 
 "Solarized theme related parameters
 set background=light
@@ -74,13 +75,21 @@ colorscheme solarized
 
 nnoremap <Leader>t :CtrlP
 nnoremap <Leader>tp :CtrlPTag
+nnoremap <Leader>tb :CtrlPBuffer
 nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
 nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
 nnoremap <Leader>c :TComment
 nnoremap <Leader>tf :Rake " test this whole file
 nnoremap <Leader>tt :.Rake " test only this test
 vnoremap <Leader>c :TComment
-nnoremap <Leader>ct :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
+nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
+nnoremap <Leader>]v :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+" Faster window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-\> <C-W><bar>
 
 fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
@@ -94,4 +103,3 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " Exclude Javascript files in :Rtags via rails.vim due to warnings when
 " parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
-

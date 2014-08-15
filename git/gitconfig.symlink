@@ -7,7 +7,7 @@
 
 [core]
   excludesfile = ~/.gitignore
-	editor = /usr/bin/vim
+  editor = /usr/local/bin/vim
 
 [mergetool]
   keepBackup = false
@@ -22,7 +22,7 @@
   co = checkout
   po = pull origin
   pso = push origin
-  cm = commit -m 
+  cm = commit -m
   br = branch
   st = status
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
