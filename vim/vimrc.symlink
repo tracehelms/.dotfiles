@@ -79,9 +79,9 @@ nnoremap <Leader>tb :CtrlPBuffer
 nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
 nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
 nnoremap <Leader>c :TComment
+vnoremap <Leader>c :TComment
 nnoremap <Leader>tf :Rake " test this whole file
 nnoremap <Leader>tt :.Rake " test only this test
-vnoremap <Leader>c :TComment
 nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
 nnoremap <Leader>]v :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " Faster window movement
@@ -90,6 +90,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-\> <C-W><bar>
+nnoremap <Leader>gr :!go run %
 
 fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
