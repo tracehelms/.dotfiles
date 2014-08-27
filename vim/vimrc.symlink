@@ -17,6 +17,10 @@ call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
 
+
+""""""""""""""""""""""
+"""""" SETTINGS """"""
+""""""""""""""""""""""
 " Tabs
 set tabstop=2 "Sets indents to 2 spaces
 set shiftwidth=2 "Sets indents to 2 spaces
@@ -24,34 +28,7 @@ set shiftround
 set expandtab "Uses spaces instead of tabs
 set list listchars=tab:»·,trail:· " Display extra whitespace
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-" Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-" ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-
-let g:html_indent_tags = 'li\|p' " Treat <li> and <p> tags like the block tags they are
-
+" Other settings
 set number "Shows lines numbers
 set cursorline "Highlights current line under cursor
 set ruler
@@ -68,38 +45,86 @@ set splitright
 set re=1 " Use old regex engine, ruby syntax regexes were lagging
 set hlsearch
 
-"Solarized theme related parameters
-set background=light
-let g:solarized_termtrans=1
-colorscheme solarized
 
-nnoremap <Leader>t :CtrlP
-nnoremap <Leader>tp :CtrlPTag
-nnoremap <Leader>tb :CtrlPBuffer
-nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
-nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
-nnoremap <Leader>c :TComment
-nnoremap <Leader>tf :Rake " test this whole file
-nnoremap <Leader>tt :.Rake " test only this test
-vnoremap <Leader>c :TComment
-nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
-nnoremap <Leader>]v :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-" Faster window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <C-\> <C-W><bar>
+""""""""""""""""""""""
+""" CUSTOMIZATIONS """
+""""""""""""""""""""""
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+" Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
 
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+" ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" Tab completion
+" will insert tab at beginning of line, will use completion if not at beginning
+set wildmode=list:longest,list:full
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+
+" This removes trailing whitespaces on save
 fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
   call cursor(l, c)
 endfun
-" This removes trailing whitespaces on save
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Exclude Javascript files in :Rtags via rails.vim due to warnings when
 " parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+
+let g:html_indent_tags = 'li\|p' " Treat <li> and <p> tags like the block tags they are
+
+" Solarized theme related parameters
+set background=light
+let g:solarized_termtrans=1
+colorscheme solarized
+
+
+""""""""""""""""""""""
+"""""" MAPPINGS """"""
+""""""""""""""""""""""
+" CtrlP
+nnoremap <Bslash> :CtrlP<cr>
+nnoremap <Leader>p :CtrlP<cr>
+nnoremap <Leader>pp :CtrlPTag<cr>
+nnoremap <Leader>pb :CtrlPBuffer<cr>
+" Saving, etc
+nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
+nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
+" Commenting
+nnoremap <Leader>c :TComment<cr>
+vnoremap <Leader>c :TComment<cr>
+" Testing
+nnoremap <Leader>rt<cr> :Rake " test this whole file, run tests
+nnoremap <Leader>rtt<cr> :.Rake " test only this test, run this test
+" Tags
+nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
+nnoremap <Leader>]v :vsp <CR>:exec("tag ".expand("<cword>"))<CR> " open tag definition in new vsplit window
+" Clipboard manipulation
+nnoremap <Leader>yfn :let @* = expand("%") " copy file path to clipboard, yank file name
+" Window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-\> <C-W><bar>
+" Searching
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw! " bind \ (backward slash) to grep shortcut
+nnoremap <Leader>a :Ag<SPACE>
+nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word under cursor
+
