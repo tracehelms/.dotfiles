@@ -48,7 +48,7 @@ get_git_color () {
 # The prompt
 # You have to wrap non-printing characters in \[....\] so that the cursor ends up in the right spot on new lines
 
-export PS1="\[$orange_fg\]\w \[\$(get_git_color)\]\$(git_branch)\[$orange_fg\$$reset_color\] "
+export PS1="\[$orange_fg\]\w \[\$(get_git_color)\]\[\$(git_branch)\]\[$orange_fg\$$reset_color\] "
 
 
 
