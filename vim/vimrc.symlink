@@ -13,6 +13,7 @@ call vundle#begin()
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/ctags.vim'
   Plugin 'vim-scripts/tComment'
+  Plugin 'cakebaker/scss-syntax.vim'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
@@ -127,4 +128,5 @@ nnoremap <C-\> <C-W><bar>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw! " bind \ (backward slash) to grep shortcut
 nnoremap <Leader>a :Ag<SPACE>
 nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word under cursor
+nnoremap <Leader>gr :!go run %
 

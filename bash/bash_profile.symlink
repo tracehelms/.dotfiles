@@ -1,6 +1,11 @@
 # where the dotfiles are
 export DOTFILES=~/.dotfiles
 
+# Go stuff
+export GOPATH=~/code/golang/
+export GOROOT=/usr/local/go/
+export PATH=$PATH:$GOPATH/bin
+
 # add paths that should have been there by default
 export PATH="/usr/local/bin:$PATH"
 export PATH="~/.dotfiles/bin:$PATH"
@@ -30,4 +35,3 @@ for file in $DOTFILES/**/*.bash
 do
   source $file
 done
-[[ -s "/Users/tracehelms/.gvm/scripts/gvm" ]] && source "/Users/tracehelms/.gvm/scripts/gvm"
