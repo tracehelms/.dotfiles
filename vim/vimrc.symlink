@@ -110,13 +110,13 @@ nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quit
 nnoremap <Leader>c :TComment<cr>
 vnoremap <Leader>c :TComment<cr>
 " Testing
-nnoremap <Leader>rt<cr> :Rake " test this whole file, run tests
-nnoremap <Leader>rtt<cr> :.Rake " test only this test, run this test
+nnoremap <Leader>rt :Rake " test this whole file, run tests
+nnoremap <Leader>rtt :.Rake " test only this test, run this test
 " Tags
 nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
 nnoremap <Leader>]v :vsp <CR>:exec("tag ".expand("<cword>"))<CR> " open tag definition in new vsplit window
 " Clipboard manipulation
-nnoremap <Leader>yfn :let @* = expand("%") " copy file path to clipboard, yank file name
+nnoremap <Leader>yfn :let @* = expand("%")<cr> " copy file path to clipboard, yank file name
 " Window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
