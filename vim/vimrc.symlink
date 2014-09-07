@@ -13,6 +13,7 @@ call vundle#begin()
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/ctags.vim'
   Plugin 'vim-scripts/tComment'
+  Plugin 'cakebaker/scss-syntax.vim'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
