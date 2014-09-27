@@ -91,6 +91,9 @@ let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
 let g:html_indent_tags = 'li\|p' " Treat <li> and <p> tags like the block tags they are
 
+" Detect *.md files as Markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
 " Theme related parameters
 colorscheme tomorrow
 
