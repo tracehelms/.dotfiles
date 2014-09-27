@@ -8,12 +8,13 @@ call vundle#begin()
   Plugin 'gmarik/Vundle.vim'
   Plugin 'kien/ctrlp.vim'
   Plugin 'tpope/vim-rails'
-  Plugin 'altercation/vim-colors-solarized'
+  " Plugin 'altercation/vim-colors-solarized'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/ctags.vim'
   Plugin 'vim-scripts/tComment'
   Plugin 'cakebaker/scss-syntax.vim'
+  Plugin 'tracehelms/vim-tomorrow-theme'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
@@ -90,10 +91,8 @@ let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
 let g:html_indent_tags = 'li\|p' " Treat <li> and <p> tags like the block tags they are
 
-" Solarized theme related parameters
-set background=light
-let g:solarized_termtrans=1
-colorscheme solarized
+" Theme related parameters
+colorscheme tomorrow
 
 
 """"""""""""""""""""""
@@ -107,6 +106,7 @@ nnoremap <Leader>pb :CtrlPBuffer<cr>
 " Saving, etc
 nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
 nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
+nnoremap <Leader>q :q<cr>
 " Commenting
 nnoremap <Leader>c :TComment<cr>
 vnoremap <Leader>c :TComment<cr>
