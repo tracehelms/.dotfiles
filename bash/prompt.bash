@@ -30,7 +30,7 @@ git_branch (){
 
 git_color (){
   if git rev-parse --git-dir > /dev/null 2>&1; then
-    if git diff --quiet 2>/dev/null >&2; then
+    if git status | grep "nothing to commit" 2>/dev/null >&2; then
       # Branch clean
       echo $blue_fg
     else
