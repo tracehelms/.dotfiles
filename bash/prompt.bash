@@ -25,18 +25,24 @@ git_branch (){
   fi
 
   git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+  echo "[$git_branch]"
+}
 
-  if git diff --quiet 2>/dev/null >&2; then
-    # Branch clean
-    git_color=$blue_fg
+git_color (){
+  if git rev-parse --git-dir > /dev/null 2>&1; then
+    if git diff --quiet 2>/dev/null >&2; then
+      # Branch clean
+      echo $blue_fg
+    else
+      # Branch dirty
+      echo $red_fg
+    fi
   else
-    # Branch dirty
-    git_color=$red_fg
+    return 0
   fi
-  echo "${git_color}[$git_branch]"
 }
 
 
 # The prompt
-export PS1="$orange_fg\w/ \$(git_branch)$orange_fg\$$reset_color "
+export PS1="\[$orange_fg\]\w/ \[\$(git_color)\]\$(git_branch)\[$orange_fg\]\$\[$reset_color\] "
 
