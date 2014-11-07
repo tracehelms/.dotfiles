@@ -1,6 +1,6 @@
 [user]
-  name = Trace Helms
-  email = tracehelms@gmail.com
+  name = YOUR_NAME
+  email = YOUR_EMAIL
 
 [credential]
   helper = osxkeychain
