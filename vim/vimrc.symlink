@@ -106,27 +106,36 @@ nnoremap <Bslash> :CtrlP<cr>
 nnoremap <Leader>p :CtrlP<cr>
 nnoremap <Leader>pp :CtrlPTag<cr>
 nnoremap <Leader>pb :CtrlPBuffer<cr>
+
 " Saving, etc
 nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
 nnoremap <Leader>wq :retab<bar>:wq<cr> " changes tabs to spaces, saves, and quits
 nnoremap <Leader>q :q<cr>
+
 " Commenting
 nnoremap <Leader>c :TComment<cr>
 vnoremap <Leader>c :TComment<cr>
+
 " Testing
 nnoremap <Leader>rt :Rake " test this whole file, run tests
 nnoremap <Leader>rtt :.Rake " test only this test, run this test
+
 " Tags
 nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
 nnoremap <Leader>]v :vsp <CR>:exec("tag ".expand("<cword>"))<CR> " open tag definition in new vsplit window
+
 " Clipboard manipulation
 nnoremap <Leader>yfn :let @* = expand("%")<cr> " copy file path to clipboard, yank file name
+"replace current word with contents of register
+nnoremap <silent> cp "_cw<C-R>"<Esc>
+
 " Window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-\> <C-W><bar>
+
 " Searching
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw! " bind \ (backward slash) to grep shortcut
 nnoremap <Leader>a :Ag<SPACE>
