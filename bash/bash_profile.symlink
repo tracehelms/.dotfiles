@@ -3,7 +3,6 @@ export DOTFILES=~/.dotfiles
 
 # Go stuff
 export GOPATH=~/code/golang/
-export GOROOT=/usr/local/go/
 export PATH=$PATH:$GOPATH/bin
 
 # add paths that should have been there by default
@@ -21,6 +20,7 @@ export CLICOLOR=1
 firefox(){
   open -a /Applications/Firefox.app/ "$1"
 }
+
 # erase duplicates in history
 export HISTCONTROL=erasedups
 

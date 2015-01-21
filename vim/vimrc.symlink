@@ -2,7 +2,7 @@ set nocompatible               " be iMproved
 let mapleader=','
 filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle
-set rtp+=$GOROOT/misc/vim
+set rtp+=/usr/local/go/misc/vim
 call vundle#begin()
   Plugin 'gmarik/Vundle.vim'
   Plugin 'kien/ctrlp.vim'
@@ -146,5 +146,8 @@ nnoremap <C-\> <C-W><bar>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw! " bind \ (backward slash) to grep shortcut
 nnoremap <Leader>a :Ag<SPACE>
 nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word under cursor
+
+# Golang Mappings
 nnoremap <Leader>gr :!go run %
+nnoremap <Leader>gf :!go fmt %
 
