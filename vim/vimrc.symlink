@@ -128,7 +128,7 @@ nnoremap <Leader>rtt :.Rake " test only this test, run this test
 
 " Tags
 nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
-nnoremap <Leader>]v :vsp <CR>:exec("tag ".expand("<cword>"))<CR> " open tag definition in new vsplit window
+nnoremap <Leader>v :vsp <CR>:exec("tag ".expand("<cword>"))<CR> " open tag definition in new vsplit window
 
 " Clipboard manipulation
 nnoremap <Leader>yfn :let @* = expand("%")<cr> " copy file path to clipboard, yank file name
@@ -150,4 +150,5 @@ nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word unde
 " Golang Mappings
 nnoremap <Leader>gr :!go run %
 nnoremap <Leader>gf :!go fmt %
+nnoremap <Leader>gt :!go test
 
