@@ -86,11 +86,11 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-" Exclude Javascript files in :Rtags via rails.vim due to warnings when
-" parsing
+" Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
-let g:html_indent_tags = 'li\|p' " Treat <li> and <p> tags like the block tags they are
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
 
 " Detect *.md files as Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
