@@ -16,6 +16,7 @@ call vundle#begin()
   Plugin 'tracehelms/vim-tomorrow-theme'
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
+  Plugin 'fatih/vim-go'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
@@ -96,7 +97,7 @@ let g:html_indent_tags = 'li\|p'
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Theme related parameters
-colorscheme tomorrow
+colorscheme tomorrow-night-eighties
 
 " Set trigger keys for UltiSnips
 let g:UltiSnipsExpandTrigger="<s-tab>"
