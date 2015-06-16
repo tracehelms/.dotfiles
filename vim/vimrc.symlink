@@ -87,6 +87,15 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+" Deletes all hidden buffers (ones not currently visible)
+function DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+
 " Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
@@ -110,9 +119,12 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 """"""""""""""""""""""
 " CtrlP
 nnoremap <Bslash> :CtrlP<cr>
-nnoremap <Leader>p :CtrlP<cr>
-nnoremap <Leader>pp :CtrlPTag<cr>
-nnoremap <Leader>pb :CtrlPBuffer<cr>
+" nnoremap <Leader>p :CtrlP<cr>
+" nnoremap <Leader>pp :CtrlPTag<cr>
+
+" Buffers
+nnoremap <Leader>b :CtrlPBuffer<cr>
+nnoremap <Leader>db :call DeleteHiddenBuffers()<cr>
 
 " Saving, etc
 nnoremap <Leader>w :retab<bar>:w<cr> " changes tabs to spaces and save
@@ -135,6 +147,8 @@ nnoremap <Leader>v :vsp <CR>:exec("tag ".expand("<cword>"))<CR> " open tag defin
 nnoremap <Leader>yfn :let @* = expand("%")<cr> " copy file path to clipboard, yank file name
 "replace current word with contents of register
 nnoremap <silent> cp "_cw<C-R>"<Esc>
+nnoremap <Leader>sp :set paste<cr>
+nnoremap <Leader>snp :set nopaste<cr>
 
 " Window movement
 nnoremap <C-j> <C-w>j
