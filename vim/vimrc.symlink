@@ -17,6 +17,7 @@ call vundle#begin()
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
   Plugin 'fatih/vim-go'
+  Plugin 'elixir-lang/vim-elixir'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
@@ -136,8 +137,8 @@ nnoremap <Leader>c :TComment<cr>
 vnoremap <Leader>c :TComment<cr>
 
 " Testing
-nnoremap <Leader>rt :Rake " test this whole file, run tests
-nnoremap <Leader>rtt :.Rake " test only this test, run this test
+nnoremap <Leader>rt :Rake " run tests
+nnoremap <Leader>rtt :.Rake " run this test
 
 " Tags
 nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
