@@ -49,6 +49,7 @@ set splitbelow
 set splitright
 set re=1 " Use old regex engine, ruby syntax regexes were lagging
 set hlsearch
+set mouse=a " Enable using the mouse
 
 
 """"""""""""""""""""""
