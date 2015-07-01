@@ -1,12 +1,12 @@
 [user]
-  name = YOUR_NAME
-  email = YOUR_EMAIL
+  name = GIT_USER_NAME
+  email = GIT_USER_EMAIL
 
 [credential]
   helper = osxkeychain
 
 [core]
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore_global
   editor = /usr/local/bin/vim
 
 [mergetool]
