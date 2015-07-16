@@ -7,7 +7,6 @@ call vundle#begin()
   Plugin 'gmarik/Vundle.vim'
   Plugin 'kien/ctrlp.vim'
   Plugin 'tpope/vim-rails'
-  " Plugin 'altercation/vim-colors-solarized'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/ctags.vim'
@@ -18,6 +17,9 @@ call vundle#begin()
   Plugin 'honza/vim-snippets'
   Plugin 'fatih/vim-go'
   Plugin 'elixir-lang/vim-elixir'
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'mxw/vim-jsx'
+  Plugin 'Raimondi/delimitMate'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
@@ -50,6 +52,8 @@ set splitright
 set re=1 " Use old regex engine, ruby syntax regexes were lagging
 set hlsearch
 set mouse=a " Enable using the mouse
+
+let delimitMate_expand_cr = 1
 
 
 """"""""""""""""""""""
@@ -140,6 +144,8 @@ vnoremap <Leader>c :TComment<cr>
 " Testing
 nnoremap <Leader>rt :Rake " run tests
 nnoremap <Leader>rtt :.Rake " run this test
+" run npm tests
+nnoremap <Leader>nt :!npm test
 
 " Tags
 nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails

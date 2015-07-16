@@ -8,6 +8,7 @@
 [core]
   excludesfile = ~/.gitignore_global
   editor = /usr/local/bin/vim
+  autocrlf = input
 
 [mergetool]
   keepBackup = false
