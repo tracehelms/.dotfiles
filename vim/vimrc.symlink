@@ -39,7 +39,6 @@ set list listchars=tab:»·,trail:· " Display extra whitespace
 set number "Shows lines numbers
 set cursorline "Highlights current line under cursor
 set ruler
-set colorcolumn=110 "Sets a visible line marker at line 110 (highlights column 111, left side=110)
 set laststatus=2 "Shows the status bar even if there is only one buffer open
 set timeoutlen=1000
 set ttimeoutlen=100
@@ -52,6 +51,7 @@ set splitright
 set re=1 " Use old regex engine, ruby syntax regexes were lagging
 set hlsearch
 set mouse=a " Enable using the mouse
+set undodir=~/.vim/undo
 
 let delimitMate_expand_cr = 1
 
@@ -157,6 +157,8 @@ nnoremap <Leader>yfn :let @* = expand("%")<cr> " copy file path to clipboard, ya
 nnoremap <silent> cp "_cw<C-R>"<Esc>
 nnoremap <Leader>sp :set paste<cr>
 nnoremap <Leader>snp :set nopaste<cr>
+nnoremap <Leader>snp :set nopaste<cr>
+nnoremap Y y$
 
 " Window movement
 nnoremap <C-j> <C-w>j

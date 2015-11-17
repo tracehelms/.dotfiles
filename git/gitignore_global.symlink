@@ -1,4 +1,5 @@
 # System
 .DS_Store
 *.swp
+*.swo
 
