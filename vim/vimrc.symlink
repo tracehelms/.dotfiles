@@ -172,7 +172,7 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw! " b
 nnoremap <Leader>a :Ag<SPACE>
 nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word under cursor
 
-" Golang Mappings
-nnoremap <Leader>gr :GoRun
-nnoremap <Leader>gt :GoTest
+" Elixir Mappings
+nnoremap <Leader>mt :!mix test
+nnoremap <Leader>mtt :!mix test %
 
