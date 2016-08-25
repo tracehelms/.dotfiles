@@ -20,6 +20,7 @@ call vundle#begin()
   Plugin 'mxw/vim-jsx'
   Plugin 'Raimondi/delimitMate'
   Plugin 'terryma/vim-multiple-cursors'
+  Plugin 'rust-lang/rust.vim'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
