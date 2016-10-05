@@ -7,7 +7,6 @@ call vundle#begin()
   Plugin 'gmarik/Vundle.vim'
   Plugin 'kien/ctrlp.vim'
   Plugin 'tpope/vim-rails'
-  Plugin 'kchmck/vim-coffee-script'
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/ctags.vim'
   Plugin 'vim-scripts/tComment'
@@ -21,6 +20,7 @@ call vundle#begin()
   Plugin 'Raimondi/delimitMate'
   Plugin 'terryma/vim-multiple-cursors'
   Plugin 'rust-lang/rust.vim'
+  Plugin 'lambdatoast/elm.vim.git'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
