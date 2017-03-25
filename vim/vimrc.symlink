@@ -13,14 +13,12 @@ call vundle#begin()
   Plugin 'cakebaker/scss-syntax.vim'
   Plugin 'tracehelms/vim-tomorrow-theme'
   Plugin 'altercation/vim-colors-solarized'
-  Plugin 'fatih/vim-go'
   Plugin 'elixir-lang/vim-elixir'
   Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
   Plugin 'Raimondi/delimitMate'
   Plugin 'terryma/vim-multiple-cursors'
-  Plugin 'rust-lang/rust.vim'
-  Plugin 'lambdatoast/elm.vim.git'
+  Plugin 'ElmCast/elm-vim'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
@@ -53,8 +51,13 @@ set re=1 " Use old regex engine, ruby syntax regexes were lagging
 set hlsearch
 set mouse=a " Enable using the mouse
 set undodir=~/.vim/undo
+set backupcopy=yes
 
 let delimitMate_expand_cr = 1
+
+" Elm-vim stuff
+let g:elm_setup_keybindings = 0
+let g:elm_format_autosave = 1
 
 
 """"""""""""""""""""""
@@ -113,12 +116,7 @@ let g:html_indent_tags = 'li\|p'
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Theme related parameters
-colorscheme tomorrow-night-eighties
-
-" Set trigger keys for UltiSnips
-let g:UltiSnipsExpandTrigger="<s-tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+colorscheme solarized
 
 
 """"""""""""""""""""""
@@ -126,8 +124,6 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 """"""""""""""""""""""
 " CtrlP
 nnoremap <Bslash> :CtrlP<cr>
-" nnoremap <Leader>p :CtrlP<cr>
-" nnoremap <Leader>pp :CtrlPTag<cr>
 
 " Buffers
 nnoremap <Leader>b :CtrlPBuffer<cr>

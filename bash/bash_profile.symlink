@@ -13,6 +13,13 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+# Add stuff for Kiex
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
 # This enables colors in the base terminal, such as folder vs. file highlighting
 export CLICOLOR=1
 
@@ -35,3 +42,8 @@ for file in $DOTFILES/**/*.bash
 do
   source $file
 done
+
+alias vi="nvim"
+alias vim="nvim"
+
+source ~/.bashrc
