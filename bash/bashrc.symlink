@@ -3,9 +3,10 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/Users/$USER/bin:$PATH"
 
 # For Go Lang
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
-export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
-export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
+export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile work)
+export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile work)

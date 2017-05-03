@@ -7,8 +7,9 @@
 
 [core]
   excludesfile = ~/.gitignore_global
-  editor = /usr/local/bin/vim
+  editor = nvim
   autocrlf = input
+  pager = diff-so-fancy | less --tabs=4 -RFX
 
 [mergetool]
   keepBackup = false
@@ -28,4 +29,4 @@
   st = status
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   dns = diff --ignore-space-change
-
+  dc = diff --cached
