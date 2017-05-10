@@ -5,19 +5,23 @@ set rtp+=~/.vim/bundle/vundle
 set rtp+=/usr/local/go/misc/vim
 call vundle#begin()
   Plugin 'gmarik/Vundle.vim'
+  " Utility
   Plugin 'kien/ctrlp.vim'
-  Plugin 'tpope/vim-rails'
+  Plugin 'SirVer/ultisnips'
+  Plugin 'honza/vim-snippets'
   Plugin 'scrooloose/nerdtree'
-  Plugin 'vim-scripts/ctags.vim'
   Plugin 'vim-scripts/tComment'
-  Plugin 'cakebaker/scss-syntax.vim'
-  Plugin 'tracehelms/vim-tomorrow-theme'
-  Plugin 'altercation/vim-colors-solarized'
-  Plugin 'elixir-lang/vim-elixir'
-  Plugin 'pangloss/vim-javascript'
-  Plugin 'mxw/vim-jsx'
   Plugin 'Raimondi/delimitMate'
   Plugin 'terryma/vim-multiple-cursors'
+  " Theme
+  Plugin 'tracehelms/vim-tomorrow-theme'
+  Plugin 'altercation/vim-colors-solarized'
+  " Languages
+  Plugin 'elixir-lang/vim-elixir'
+  Plugin 'tpope/vim-rails'
+  Plugin 'cakebaker/scss-syntax.vim'
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'mxw/vim-jsx'
   Plugin 'ElmCast/elm-vim'
 call vundle#end()
 filetype plugin indent on
@@ -105,9 +109,6 @@ function DeleteHiddenBuffers()
     endfor
 endfunction
 
-" Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
-let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
-
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
@@ -143,10 +144,6 @@ nnoremap <Leader>rtt :.Rake " run this test
 " run npm tests
 nnoremap <Leader>nt :!npm test
 
-" Tags
-nnoremap <Leader>]i :!ctags -R .<CR> " Index ctags from any project, including those outside Rails
-nnoremap <Leader>v :vsp <CR>:exec("tag ".expand("<cword>"))<CR> " open tag definition in new vsplit window
-
 " Clipboard manipulation
 nnoremap <Leader>yfn :let @* = expand("%")<cr> " copy file path to clipboard, yank file name
 "replace current word with contents of register
@@ -167,6 +164,11 @@ nnoremap <C-\> <C-W><bar>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw! " bind \ (backward slash) to grep shortcut
 nnoremap <Leader>a :Ag<SPACE>
 nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word under cursor
+
+" Snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-g>"
 
 " Elixir Mappings
 nnoremap <Leader>mt :!mix test
