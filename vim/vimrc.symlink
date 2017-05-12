@@ -13,12 +13,13 @@ call vundle#begin()
   Plugin 'vim-scripts/tComment'
   Plugin 'Raimondi/delimitMate'
   Plugin 'terryma/vim-multiple-cursors'
+  Plugin 'janko-m/vim-test'
   " Theme
   Plugin 'tracehelms/vim-tomorrow-theme'
   Plugin 'altercation/vim-colors-solarized'
   " Languages
-  Plugin 'elixir-lang/vim-elixir'
   Plugin 'tpope/vim-rails'
+  Plugin 'elixir-lang/vim-elixir'
   Plugin 'cakebaker/scss-syntax.vim'
   Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
@@ -143,6 +144,13 @@ nnoremap <Leader>rt :Rake " run tests
 nnoremap <Leader>rtt :.Rake " run this test
 " run npm tests
 nnoremap <Leader>nt :!npm test
+" Trying out janka-m/vim-test
+let test#filename_modifier = ":p"
+let test#strategy = "neovim"
+nmap <silent> <leader>tt :TestNearest<CR> " Test This
+nmap <silent> <leader>tf :TestFile<CR> " Test File
+nmap <silent> <leader>ta :TestSuite<CR> " Test All
+nmap <silent> <leader>tl :TestLast<CR> "Test Last
 
 " Clipboard manipulation
 nnoremap <Leader>yfn :let @* = expand("%")<cr> " copy file path to clipboard, yank file name
@@ -166,7 +174,7 @@ nnoremap <Leader>a :Ag<SPACE>
 nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word under cursor
 
 " Snippets
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<S-Tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-g>"
 
