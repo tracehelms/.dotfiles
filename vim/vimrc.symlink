@@ -14,6 +14,7 @@ call vundle#begin()
   Plugin 'Raimondi/delimitMate'
   Plugin 'terryma/vim-multiple-cursors'
   Plugin 'janko-m/vim-test'
+  Plugin 'tpope/vim-surround'
   " Theme
   Plugin 'tracehelms/vim-tomorrow-theme'
   Plugin 'altercation/vim-colors-solarized'
