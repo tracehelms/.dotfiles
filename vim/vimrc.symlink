@@ -58,7 +58,7 @@ set hlsearch
 set mouse=a " Enable using the mouse
 set undodir=~/.vim/undo
 set backupcopy=yes
-set wrap=true
+set wrap
 map j gj
 map k gk
 
