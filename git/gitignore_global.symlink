@@ -4,4 +4,5 @@
 *.swo
 *.beam
 _build/
+deps/
 
