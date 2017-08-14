@@ -61,6 +61,7 @@ set backupcopy=yes
 set wrap
 map j gj
 map k gk
+set iskeyword+=-
 
 let delimitMate_expand_cr = 1
 
@@ -148,7 +149,7 @@ nnoremap <Leader>rt :Rake " run tests
 nnoremap <Leader>rtt :.Rake " run this test
 " run npm tests
 nnoremap <Leader>nt :!npm test
-" Trying out janka-m/vim-test
+" Trying out janko-m/vim-test
 let test#filename_modifier = ":p"
 let test#strategy = "neovim"
 nmap <silent> <leader>tt :TestNearest<CR> " Test This
