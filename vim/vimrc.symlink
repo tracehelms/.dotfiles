@@ -155,7 +155,7 @@ let test#strategy = "neovim"
 nmap <silent> <leader>tt :TestNearest<CR> " Test This
 nmap <silent> <leader>tf :TestFile<CR> " Test File
 nmap <silent> <leader>ta :TestSuite<CR> " Test All
-nmap <silent> <leader>tl :TestLast<CR> "Test Last
+nmap <silent> <leader>tl :TestLast<CR> " Test Last
 
 " Clipboard manipulation
 nnoremap <Leader>yfn :let @* = expand("%")<cr> " copy file path to clipboard, yank file name
