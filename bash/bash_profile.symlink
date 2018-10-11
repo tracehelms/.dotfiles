@@ -1,32 +1,13 @@
 # where the dotfiles are
 export DOTFILES=~/.dotfiles
 
-# Go stuff
-export GOPATH=~/code/golang/
-export PATH=$PATH:$GOPATH/bin
-
-# add paths that should have been there by default
-export PATH="/usr/local/bin:$PATH"
-export PATH="~/.dotfiles/bin:$PATH"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-fi
-
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-
-# Add stuff for Kiex
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-
 # This enables colors in the base terminal, such as folder vs. file highlighting
 export CLICOLOR=1
 
 # Adds a shortcut to open a file in Firefox
-firefox(){
-  open -a /Applications/Firefox.app/ "$1"
-}
+# firefox(){
+#   open -a /Applications/Firefox.app/ "$1"
+# }
 
 # erase duplicates in history
 export HISTCONTROL=erasedups
@@ -45,5 +26,14 @@ done
 
 alias vi="nvim"
 alias vim="nvim"
+alias np="vim ~/Dropbox/notes/index.md"
+alias nw="vim ~/Dropbox/notes/work.md"
+# alias nj="vim ~/Dropbox/writing/journal/ ... todays date"
 
 source ~/.bashrc
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
+
+export PATH="$HOME/.cargo/bin:$PATH"
