@@ -89,9 +89,10 @@ let g:jsx_ext_required = 0
 " Use ripgrep for searching and fzf
 if executable('rg')
   " Define ripgrep :Find search command
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob --color=never "!.git/*" '.shellescape(<q-args>), 1, <bang>0)
-  set grepprg=rg\ --vimgrep
+  set grepprg=rg\ --vimgrep\ --ignore-case
+  " command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob --color=never "!.git/*" '.shellescape(<q-args>), 1, <bang>0)
 endif
+command! -nargs=+ Find execute 'silent grep! <args>' | copen 33
 
 " Tab completion
 " will insert tab at beginning of line, will use completion if not at beginning
