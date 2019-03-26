@@ -1,11 +1,11 @@
 set nocompatible               " be iMproved
 let mapleader=','
 filetype off                   " required!
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=/usr/local/go/misc/vim
 set rtp+=/usr/local/opt/fzf
 call vundle#begin()
-  Plugin 'gmarik/Vundle.vim'
+  Plugin 'VundleVim/Vundle.vim'
   " Utility
   Plugin 'junegunn/fzf.vim'
   Plugin 'SirVer/ultisnips'
@@ -22,6 +22,9 @@ call vundle#begin()
   Plugin 'chriskempson/base16-vim'
   " All the languages!
   Plugin 'sheerun/vim-polyglot'
+  Plugin 'peitalin/vim-jsx-typescript' " not in vim-polyglot 2019-01-16
+  " Plugin 'ianks/vim-tsx'
+  Plugin 'junegunn/goyo.vim'
 call vundle#end()
 filetype plugin indent on
 syntax on "Enables syntax highlighting
@@ -42,15 +45,15 @@ set number "Shows lines numbers
 set cursorline "Highlights current line under cursor
 set ruler
 set laststatus=2 "Shows the status bar even if there is only one buffer open
-set timeoutlen=1000
-set ttimeoutlen=100
+" set timeoutlen=1000
+" set ttimeoutlen=100
 set backspace=2 "Allows backspacing over everything in insert mode
-set lazyredraw "Makes scrolling lag not as bad
-set ttyfast "Force terminal to assume a fast connection
+" set lazyredraw "Makes scrolling lag not as bad
+" set ttyfast "Force terminal to assume a fast connection
 set t_Co=256
 set splitbelow
 set splitright
-set re=1 " Use old regex engine, ruby syntax regexes were lagging
+" set re=1 " Use old regex engine, ruby syntax regexes were lagging
 set hlsearch
 set mouse=a " Enable using the mouse
 set undodir=~/.vim/undo
@@ -59,12 +62,15 @@ set wrap
 map j gj
 map k gk
 set iskeyword+=-
+set foldmethod=syntax
+set foldlevelstart=20
+set termguicolors " neovim color compatibility
 
 let delimitMate_expand_cr = 1
 
 " Elm-vim stuff
-let g:elm_setup_keybindings = 0
-let g:elm_format_autosave = 1
+" let g:elm_setup_keybindings = 0
+" let g:elm_format_autosave = 1
 
 " Highlight JSX in JS files
 let g:jsx_ext_required = 0
@@ -78,7 +84,7 @@ let g:jsx_ext_required = 0
 " Use ripgrep for searching and CtrlP
 " if executable('rg')
 "  set grepprg=rg\ --color=never
-"  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
 "  let g:ctrlp_use_caching = 0
 "  let g:ctrlp_show_hidden = 1
 " endif
@@ -88,10 +94,10 @@ let g:jsx_ext_required = 0
 
 " Use ripgrep for searching and fzf
 if executable('rg')
-  " Define ripgrep :Find search command
-  set grepprg=rg\ --vimgrep\ --ignore-case
+  set grepprg=rg\ --vimgrep\ --ignore-case\ --hidden\ --no-column
   " command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob --color=never "!.git/*" '.shellescape(<q-args>), 1, <bang>0)
 endif
+" Define ripgrep :Find search command
 command! -nargs=+ Find execute 'silent grep! <args>' | copen 33
 
 " Tab completion
@@ -106,15 +112,6 @@ function! InsertTabWrapper()
     endif
 endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-
-" This removes trailing whitespaces on save
-" fun! <SID>StripTrailingWhitespaces()
-"   let l = line(".")
-"   let c = col(".")
-"   %s/\s\+$//e
-"   call cursor(l, c)
-" endfun
-" autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Deletes all hidden buffers (ones not currently visible)
 function DeleteHiddenBuffers()
@@ -135,16 +132,25 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 colorscheme base16-solarized-light
 
 " Ale linters and fixers
+
 let g:ale_linters = {
-\   'vue': ['eslint', 'prettier', 'stylelint']
+\   'typescript': ['tsserver', 'tslint'],
+\   'markdown': ['prettier'],
+\   'html.handlebars': ['ember-template-lint'],
+\   'handlebars': ['ember-template-lint'],
+\   'hbs': ['ember-template-lint'],
 \}
 let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
 \   'rust': ['rustfmt'],
-\   'typescript': ['eslint', 'prettier'],
-\   'vue': ['eslint', 'prettier', 'stylelint']
+\   'markdown': ['prettier'],
+\   'html.handlebars': [],
+\   'handlebars': [],
+\   'hbs': [],
+\   'typescript': ['tslint']
 \}
 let g:ale_fix_on_save = 1
 
@@ -189,7 +195,7 @@ nmap <silent> <leader>tl :TestLast<CR> " Test Last
 
 " Clipboard manipulation
 " copy file path to clipboard, yank file name
-nnoremap <Leader>yfn :let @* = expand("%")<cr> 
+nnoremap <Leader>yfn :let @* = expand("%")<cr>
 "replace current word with contents of register
 nnoremap <silent> cp "_cw<C-R>"<Esc>
 nnoremap <Leader>sp :set paste<cr>
@@ -209,6 +215,7 @@ nnoremap <Leader>a :Find<SPACE>
 nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word under cursor
 
 " Snippets
+let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger="<S-Tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-g>"
@@ -217,3 +224,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-g>"
 nnoremap <Leader>mt :!mix test
 nnoremap <Leader>mtt :!mix test %
 nnoremap <Leader>er :!elixir %
+
+" Ale
+nnoremap <Leader>d :ALEDetail<cr>
