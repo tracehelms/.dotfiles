@@ -4,17 +4,16 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="/Users/$USER/bin:$PATH"
 
-# export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile work)
-# export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile work)
-
-# Add paths that should have been there by default
+# Add path that should have been there by default
 export PATH="/usr/local/bin:$PATH"
+# Add custom scripts
 export PATH="~/.dotfiles/bin:$PATH"
 
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+# Android stuff
 export ANDROID_HOME=~/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
@@ -24,3 +23,9 @@ export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
 # Use ripgrep by default with fzf (vim fuzzy file searcher)
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
+export PRIVATE_KEY_PATH=~/.ssh/id_rsa
+export AWS_ACCESS_KEY_ID=`aws configure get aws_access_key_id --profile=getthru`
+export AWS_SECRET_ACCESS_KEY=`aws configure get aws_secret_access_key --profile=getthru`
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

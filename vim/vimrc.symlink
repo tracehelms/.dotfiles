@@ -23,7 +23,6 @@ call vundle#begin()
   " All the languages!
   Plugin 'sheerun/vim-polyglot'
   Plugin 'peitalin/vim-jsx-typescript' " not in vim-polyglot 2019-01-16
-  " Plugin 'ianks/vim-tsx'
   Plugin 'junegunn/goyo.vim'
 call vundle#end()
 filetype plugin indent on

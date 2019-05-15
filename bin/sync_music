@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+printf "%s" "Syncing local iTunes folder to phone's removable storage drive..."
+adb-sync --delete /Users/tracehelms/Music/iTunes/iTunes\ Media/Music /storage/4D03-72EE/
