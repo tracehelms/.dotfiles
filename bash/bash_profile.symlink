@@ -28,7 +28,7 @@ alias vi="nvim"
 alias vim="nvim"
 alias np="vim ~/Dropbox/notes/index.md"
 alias nw="vim ~/Dropbox/notes/work.md"
-# alias nj="vim ~/Dropbox/writing/journal/ ... todays date"
+alias nj="vim ~/Dropbox/writing/journal/`date +%Y-%m-%d`.md"
 
 source ~/.bashrc
 
