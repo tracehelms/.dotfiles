@@ -97,7 +97,7 @@ if executable('rg')
   " command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob --color=never "!.git/*" '.shellescape(<q-args>), 1, <bang>0)
 endif
 " Define ripgrep :Find search command
-command! -nargs=+ Find execute 'silent grep! <args>' | copen 33
+command! -nargs=+ Find execute 'silent grep! <args>' | copen
 
 " Tab completion
 " will insert tab at beginning of line, will use completion if not at beginning
