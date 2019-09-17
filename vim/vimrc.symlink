@@ -2,8 +2,6 @@ set nocompatible               " be iMproved
 let mapleader=','
 filetype off                   " required!
 set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=/usr/local/go/misc/vim
-set rtp+=/usr/local/opt/fzf
 call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
   " Utility
@@ -22,9 +20,12 @@ call vundle#begin()
   Plugin 'chriskempson/base16-vim'
   " All the languages!
   Plugin 'sheerun/vim-polyglot'
+  Plugin 'elixir-editors/vim-elixir'
   Plugin 'peitalin/vim-jsx-typescript' " not in vim-polyglot 2019-01-16
   Plugin 'junegunn/goyo.vim'
 call vundle#end()
+set rtp+=/usr/local/go/misc/vim
+set rtp+=/usr/local/opt/fzf
 filetype plugin indent on
 syntax on "Enables syntax highlighting
 

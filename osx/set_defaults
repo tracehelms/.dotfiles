@@ -2,75 +2,7 @@
 #
 # set os x defaults
 
-# updates: check for software updates daily
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
-
-# printing: expand print panel by default
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-
-# printing: automatically quit printer app once print jobs complete
-defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-# trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
-# keyboard: disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
 # keyboard: set a fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
-
-# screen: require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-# screen: save screenshots to the desktop
-defaults write com.apple.screencapture location -string "$HOME/Desktop"
-
-# screen: save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-defaults write com.apple.screencapture type -string "png"
-
-# dock: auto-hide
-defaults write com.apple.dock autohide -bool true
-
-# dock: icon size
-defaults write com.apple.dock tilesize -int 48
-
-# dock: magnification
-defaults write com.apple.dock magnification -bool true
-defaults write com.apple.dock largesize -float 72
-
-# finder: show hard drives, servers, and removable media on the desktop
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-
-# finder: disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-# finder: show the ~/Library folder
-chflags nohidden ~/Library
-
-# hot corners
-# possible values:
-#  0: no-op
-#  2: mission control
-#  3: show application windows
-#  4: desktop
-#  5: start screen saver
-#  6: disable screen saver
-#  7: dashboard
-# 10: put display to sleep
-# 11: launchpad
-# 12: notification center
-# top left screen corner → start screen saver
-defaults write com.apple.dock wvous-tl-corner -int 5
-defaults write com.apple.dock wvous-tl-modifier -int 0
-
-# finder: saving
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-
-# finder: always empty trash securly
-defaults write com.apple.finder EmptyTrashSecurely -bool true
+defaults write -g KeyRepeat -int 1
+defaults write -g InitialKeyRepeat -int 10
+defaults write -g ApplePressAndHoldEnabled -bool false

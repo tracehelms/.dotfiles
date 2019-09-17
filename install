@@ -132,7 +132,7 @@ install_dotfiles () {
 }
 
 check_homebrew
-#setup_osx
+setup_osx
 setup_gitconfig
 install_dotfiles
 
