@@ -45,4 +45,3 @@ git_color (){
 
 # The prompt
 export PS1="\[$orange_fg\]\w/ \[\$(git_color)\]\$(git_branch)\[$orange_fg\]\$\[$reset_color\] "
-

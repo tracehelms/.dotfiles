@@ -1,0 +1,75 @@
+###############################
+#  Custom bash and dot files  #
+###############################
+
+for file in ~/.dotfiles/**/*.bash
+do
+  source $file
+done
+
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
+
+#############
+#  Aliases  #
+#############
+
+alias vi="nvim"
+alias vim="nvim"
+alias np="vim ~/Dropbox/notes/index.md"
+alias nw="vim ~/Dropbox/notes/work.md"
+alias nj="vim ~/Dropbox/writing/journal/`date +%Y-%m-%d`.md"
+
+
+#####################
+#  Paths and Tools  #
+#####################
+
+# Heroku toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/Users/$USER/bin:$PATH"
+
+# Add path that should have been there by default
+export PATH="/usr/local/bin:$PATH"
+# Add custom scripts
+export PATH="~/.dotfiles/bin:$PATH"
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Android
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+# Yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
+
+############################
+#  Variables and Settings  #
+############################
+
+# This enables colors in the base terminal, such as folder vs. file highlighting
+export CLICOLOR=1
+export HISTCONTROL=erasedups # erase duplicates in history
+export HISTSIZE=10000 # store 10k history entries
+shopt -s histappend # append to the history when exiting instead of overwriting
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# Use ripgrep by default with fzf (vim fuzzy file searcher)
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
+# GetThru
+export PRIVATE_KEY_PATH=~/.ssh/id_rsa
+export AWS_ACCESS_KEY_ID=`aws configure get aws_access_key_id --profile=getthru`
+export AWS_SECRET_ACCESS_KEY=`aws configure get aws_secret_access_key --profile=getthru`
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"

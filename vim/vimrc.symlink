@@ -5,6 +5,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
   " Utility
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
   Plugin 'junegunn/fzf.vim'
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
@@ -50,7 +52,7 @@ set laststatus=2 "Shows the status bar even if there is only one buffer open
 set backspace=2 "Allows backspacing over everything in insert mode
 " set lazyredraw "Makes scrolling lag not as bad
 " set ttyfast "Force terminal to assume a fast connection
-set t_Co=256
+" set t_Co=256
 set splitbelow
 set splitright
 " set re=1 " Use old regex engine, ruby syntax regexes were lagging
@@ -65,6 +67,7 @@ set iskeyword+=-
 set foldmethod=syntax
 set foldlevelstart=20
 set termguicolors " neovim color compatibility
+set spelllang=en
 
 let delimitMate_expand_cr = 1
 
@@ -75,6 +78,8 @@ let delimitMate_expand_cr = 1
 " Highlight JSX in JS files
 let g:jsx_ext_required = 0
 
+" vim-airline
+let g:airline_powerline_fonts = 1
 
 """"""""""""""""""""""
 """ CUSTOMIZATIONS """
@@ -129,30 +134,35 @@ let g:html_indent_tags = 'li\|p'
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Theme related parameters
+set background=light
 colorscheme base16-solarized-light
 
 " Ale linters and fixers
 
 let g:ale_linters = {
-\   'typescript': ['tsserver', 'tslint'],
-\   'markdown': ['prettier'],
-\   'html.handlebars': ['ember-template-lint'],
+\   'elixir': ['credo', 'mix'],
 \   'handlebars': ['ember-template-lint'],
 \   'hbs': ['ember-template-lint'],
+\   'html.handlebars': ['ember-template-lint'],
+\   'markdown': ['prettier'],
+\   'scss': ['stylelint'],
+\   'typescript': ['tsserver', 'tslint'],
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier'],
 \   'css': ['stylelint'],
-\   'scss': ['stylelint'],
-\   'rust': ['rustfmt'],
-\   'markdown': ['prettier'],
-\   'html.handlebars': [],
+\   'elixir': ['mix_format'],
 \   'handlebars': [],
 \   'hbs': [],
-\   'typescript': ['tslint'],
-\   'json': ['prettier']
+\   'html.handlebars': [],
+\   'javascript': ['prettier'],
+\   'json': ['prettier'],
+\   'markdown': ['prettier'],
+\   'rust': ['rustfmt'],
+\   'scss': ['stylelint'],
+\   'typescript': ['tslint', 'prettier'],
 \}
+let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
 
 
@@ -228,3 +238,17 @@ nnoremap <Leader>er :!elixir %
 
 " Ale
 nnoremap <Leader>d :ALEDetail<cr>
+
+" Goyo
+function! s:goyo_enter()
+  set linebreak
+  set spell spelllang=en_us
+endfunction
+
+function! s:goyo_leave()
+  set nolinebreak
+  set nospell
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
