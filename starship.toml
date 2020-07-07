@@ -1,0 +1,14 @@
+[python]
+disabled = true
+
+[elixir]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[package]
+disabled = true
+
+[git_status]
+stashed = ""
