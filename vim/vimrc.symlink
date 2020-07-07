@@ -7,6 +7,7 @@ call vundle#begin()
   " Utility
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
@@ -22,8 +23,8 @@ call vundle#begin()
   Plugin 'chriskempson/base16-vim'
   " All the languages!
   Plugin 'sheerun/vim-polyglot'
-  Plugin 'elixir-editors/vim-elixir'
-  Plugin 'peitalin/vim-jsx-typescript' " not in vim-polyglot 2019-01-16
+  " Plugin 'elixir-editors/vim-elixir'
+  " Plugin 'peitalin/vim-jsx-typescript' " not in vim-polyglot 2019-01-16
   Plugin 'junegunn/goyo.vim'
 call vundle#end()
 set rtp+=/usr/local/go/misc/vim
@@ -52,7 +53,7 @@ set laststatus=2 "Shows the status bar even if there is only one buffer open
 set backspace=2 "Allows backspacing over everything in insert mode
 " set lazyredraw "Makes scrolling lag not as bad
 " set ttyfast "Force terminal to assume a fast connection
-" set t_Co=256
+set t_Co=256
 set splitbelow
 set splitright
 " set re=1 " Use old regex engine, ruby syntax regexes were lagging
@@ -68,6 +69,7 @@ set foldmethod=syntax
 set foldlevelstart=20
 set termguicolors " neovim color compatibility
 set spelllang=en
+set scrolloff=10
 
 let delimitMate_expand_cr = 1
 
@@ -134,8 +136,14 @@ let g:html_indent_tags = 'li\|p'
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Theme related parameters
-set background=light
-colorscheme base16-solarized-light
+set background=dark
+" colorscheme base16-solarized-light
+" colorscheme base16-ocean
+" colorscheme base16-oceanicnext
+" colorscheme base16-material
+" colorscheme base16-onedark
+" colorscheme base16-railscasts
+colorscheme base16-tomorrow-night-eighties
 
 " Ale linters and fixers
 
@@ -173,6 +181,7 @@ let g:ale_fix_on_save = 1
 
 " fzf
 nnoremap <Bslash> :Files<cr>
+" let g:fzf_preview_window = '' " disable file preview
 
 " NERDTree
 nnoremap <Leader>f :NERDTreeToggle<cr>
@@ -223,7 +232,7 @@ nnoremap <C-\> <C-W><bar>
 
 " Searching
 nnoremap <Leader>a :Find<SPACE>
-nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind K to grep word under cursor
+nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind leader k to grep word under cursor
 
 " Snippets
 let g:UltiSnipsEditSplit="vertical"
