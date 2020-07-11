@@ -12,3 +12,6 @@ disabled = true
 
 [git_status]
 stashed = ""
+
+[aws]
+disabled = true
