@@ -153,6 +153,7 @@ let g:ale_linters = {
 \   'hbs': ['ember-template-lint'],
 \   'html.handlebars': ['ember-template-lint'],
 \   'markdown': ['prettier'],
+\   'rust': ['rls'],
 \   'scss': ['stylelint'],
 \   'typescript': ['tsserver', 'tslint'],
 \}
