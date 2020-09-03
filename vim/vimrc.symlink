@@ -250,14 +250,17 @@ nnoremap <Leader>er :!elixir %
 nnoremap <Leader>d :ALEDetail<cr>
 
 " Goyo
+let g:goyo_height='100%'
 function! s:goyo_enter()
   set linebreak
   set spell spelllang=en_us
+  set scrolloff=5
 endfunction
 
 function! s:goyo_leave()
   set nolinebreak
   set nospell
+  set scrolloff=10
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
