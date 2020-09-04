@@ -14,11 +14,11 @@ call vundle#begin()
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/tComment'
   Plugin 'Raimondi/delimitMate'
-  Plugin 'terryma/vim-multiple-cursors'
+  " Plugin 'terryma/vim-multiple-cursors'
   Plugin 'janko-m/vim-test'
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-fugitive'
-  Plugin 'w0rp/ale' "linting and formatting
+  Plugin 'dense-analysis/ale'
   " Themes
   Plugin 'chriskempson/base16-vim'
   " All the languages!
@@ -148,7 +148,7 @@ colorscheme base16-tomorrow-night-eighties
 " Ale linters and fixers
 
 let g:ale_linters = {
-\   'elixir': ['credo', 'mix'],
+\   'elixir': ['credo', 'mix', 'elixir-ls'],
 \   'handlebars': ['ember-template-lint'],
 \   'hbs': ['ember-template-lint'],
 \   'html.handlebars': ['ember-template-lint'],
@@ -173,6 +173,7 @@ let g:ale_fixers = {
 \}
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
+let g:ale_elixir_elixir_ls_release = $HOME.'/code/lang-servers/elixir-ls/'
 
 
 """"""""""""""""""""""
