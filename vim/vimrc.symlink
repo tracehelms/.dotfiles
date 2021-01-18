@@ -9,8 +9,8 @@ call vundle#begin()
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
-  Plugin 'SirVer/ultisnips'
-  Plugin 'honza/vim-snippets'
+  " Plugin 'SirVer/ultisnips'
+  " Plugin 'honza/vim-snippets'
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/tComment'
   Plugin 'Raimondi/delimitMate'
@@ -183,7 +183,8 @@ let g:ale_elixir_elixir_ls_release = $HOME.'/code/lang-servers/elixir-ls/'
 
 " fzf
 nnoremap <Bslash> :Files<cr>
-" let g:fzf_preview_window = '' " disable file preview
+let g:fzf_layout = { 'down': '40%' }
+" let g:fzf_preview_window = [] " disable file preview
 
 " NERDTree
 nnoremap <Leader>f :NERDTreeToggle<cr>
