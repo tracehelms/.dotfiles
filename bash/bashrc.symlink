@@ -68,8 +68,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 # GetThru
 export PRIVATE_KEY_PATH=~/.ssh/id_rsa
-export AWS_ACCESS_KEY_ID=`aws configure get aws_access_key_id --profile=getthru-dnc`
-export AWS_SECRET_ACCESS_KEY=`aws configure get aws_secret_access_key --profile=getthru-dnc`
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"

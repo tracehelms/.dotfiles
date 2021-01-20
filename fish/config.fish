@@ -60,8 +60,6 @@ set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 
 # GetThru
 set -x PRIVATE_KEY_PATH ~/.ssh/id_rsa
-set -x AWS_ACCESS_KEY_ID (aws configure get aws_access_key_id --profile=getthru)
-set -x AWS_SECRET_ACCESS_KEY (aws configure get aws_secret_access_key --profile=getthru)
 
 
 #####################
