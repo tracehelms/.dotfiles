@@ -27,6 +27,10 @@
   cm = commit -m
   br = branch
   st = status
-  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  # hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  hist = log --pretty=format:'%C(yellow)%ad %C(reset)%C(green)[%h]%C(reset) | %s %C(blue)%an%C(reset) %C(bold)%C(red)%d%C(reset)' --graph --date=short
   dns = diff --ignore-space-change
   dc = diff --cached
+
+[init]
+  defaultBranch = main
