@@ -1,3 +1,4 @@
 .dotfiles
 =========
-A big 'ole thanks to [Ben Hanzl](https://github.com/benhanzl) for the install script.
+
+A copy of the dotfiles I use to work with Neovim. Constantly being tweaked and updated.

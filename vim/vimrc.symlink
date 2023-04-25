@@ -205,11 +205,6 @@ nnoremap <Leader>c :TComment<cr>
 vnoremap <Leader>c :TComment<cr>
 
 " Testing
-" nnoremap <Leader>rt :Rake " run tests
-" nnoremap <Leader>rtt :.Rake " run this test
-" run npm tests
-" nnoremap <Leader>nt :!npm test
-" Trying out janko-m/vim-test
 let test#filename_modifier = ":p"
 let test#strategy = "neovim"
 nmap <silent> <leader>tt :TestNearest<CR> " Test This
@@ -228,10 +223,10 @@ nnoremap <Leader>snp :set nopaste<cr>
 nnoremap Y y$
 
 " Window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
+nnoremap <C-n> <C-w>j
+nnoremap <C-e> <C-w>k
 nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+nnoremap <C-i> <C-w>l
 nnoremap <C-\> <C-W><bar>
 
 " Searching
@@ -268,3 +263,5 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+nnoremap <Leader>g :Goyo<cr>

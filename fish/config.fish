@@ -43,6 +43,9 @@ set -x PATH "$HOME/.serverless/bin:$PATH"
 # asdf
 source $HOME/.asdf/asdf.fish
 
+# Godot
+export PATH="/Applications/Godot.app/Contents/MacOS:$PATH"
+
 
 ############################
 #  Variables and Settings  #
