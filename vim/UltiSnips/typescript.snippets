@@ -1,0 +1,39 @@
+snippet for "Basic For loop" b
+for (let ${1:i} = ${2:0}; $1 < $3; $1${4:++}) {
+	$5
+}
+endsnippet
+
+snippet const "Const variable" b
+const $1 = $2;
+endsnippet
+snippet econst "Export const variable" b
+export const $1 = $2;
+endsnippet
+
+
+snippet cf "Const function" b
+const $1 = ($2): $3 => {
+	$4
+};
+endsnippet
+snippet ecf "Const function" b
+export const $1 = ($2): $3 => {
+	$4
+};
+endsnippet
+
+snippet cla "Class" b
+class $1 {
+	constructor($2) {
+		$3
+	}
+}
+endsnippet
+snippet ecla "Export class" b
+export class $1 {
+	constructor($2) {
+		$3
+	}
+}
+endsnippet

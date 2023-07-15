@@ -10,7 +10,7 @@ call vundle#begin()
   Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
   Plugin 'SirVer/ultisnips'
-  Plugin 'honza/vim-snippets'
+  " Plugin 'honza/vim-snippets' " Use my own snippets
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/tComment'
   Plugin 'Raimondi/delimitMate'
@@ -155,7 +155,7 @@ let g:ale_linters = {
 \   'markdown': ['prettier'],
 \   'rust': ['rls'],
 \   'scss': ['stylelint'],
-\   'typescript': ['tsserver', 'tslint'],
+\   'typescript': ['eslint', 'prettier'],
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -169,7 +169,7 @@ let g:ale_fixers = {
 \   'markdown': ['prettier'],
 \   'rust': ['rustfmt'],
 \   'scss': ['stylelint'],
-\   'typescript': ['tslint', 'prettier'],
+\   'typescript': ['eslint', 'prettier'],
 \}
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
@@ -234,8 +234,11 @@ nnoremap <Leader>a :Find<SPACE>
 nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> " bind leader k to grep word under cursor
 
 " Snippets
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.dotfiles/vim/UltiSnips']
 let g:UltiSnipsExpandTrigger="<S-Tab>"
+nnoremap <Leader>ue :UltiSnipsEdit<cr>
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsListSnippets="<c-s>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
