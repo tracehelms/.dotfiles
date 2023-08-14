@@ -1,0 +1,108 @@
+priority -10
+
+snippet con "Const variable" b
+const $1 = $2;
+endsnippet
+
+snippet econ "Export const variable" b
+export const $1 = $2;
+endsnippet
+
+snippet conf "Const function" b
+const $1 = ($2) => {
+	$3
+};
+endsnippet
+
+snippet econf "Const function" b
+export const $1 = ($2) => {
+	$3
+};
+endsnippet
+
+snippet af "Arrow function" b
+($1) => ${2:{$3}}
+endsnippet
+
+snippet let "Let variable" b
+let $1 = $2;
+endsnippet
+
+snippet imp "ES6 import" b
+import $1 from '$2';
+endsnippet
+
+snippet impm "ES6 import" b
+import { $1 } from '$2';
+endsnippet
+
+snippet export "Export" b
+export { $1 };
+endsnippet
+
+snippet cla "Class" b
+class $1 {
+	constructor($2) {
+		$3
+	}
+}
+endsnippet
+
+snippet ecla "Export class" b
+export class $1 {
+	constructor($2) {
+		$3
+	}
+}
+endsnippet
+
+snippet for "Basic For loop" b
+for (let ${1:i} = ${2:0}; $1 < $3; $1${4:++}) {
+	$5
+}
+endsnippet
+
+snippet while "While loop" b
+while ($1) {
+	$2
+}
+endsnippet
+
+snippet ret "Return" b
+return $1;
+endsnippet
+
+snippet if "If statement" b
+if ($1) {
+	$2
+}
+endsnippet
+
+snippet elsif "Else if statement"
+else if ($1) {
+	$2
+}
+endsnippet
+
+snippet else "Else statement"
+else {
+	$1
+}
+endsnippet
+
+# Testing
+snippet desc "Test describe" b
+describe('$1', () => {
+	$2
+});
+endsnippet
+
+snippet test "Test block" b
+test('$1', ${2: async }() => {
+	$3
+});
+endsnippet
+
+snippet exp "Jest expect" b
+expect($1).${2:toBe}($3);
+endsnippet

@@ -1,0 +1,89 @@
+snippet def "Function definition" b
+def $1 do
+	$2
+end
+endsnippet
+
+snippet def@ "Function definition with doc" b
+@doc """
+$2
+"""
+def $1 do
+	$3
+end
+endsnippet
+
+snippet defp "Private function definition" b
+defp $1 do
+	$2
+end
+endsnippet
+
+snippet defp@ "Private function definition with doc" b
+@doc """
+$2
+"""
+defp $1 do
+	$3
+end
+endsnippet
+
+snippet defmo "Module declaration" b
+defmodule $1 do
+	$2
+end
+endsnippet
+
+snippet defmo@ "Module declaration with doc" b
+defmodule $1 do
+	@moduledoc """
+	$2
+	"""
+
+	$3
+end
+endsnippet
+
+snippet case "Case block" b
+case $1 do
+	$2 -> $3
+end
+endsnippet
+
+snippet cond "Condition block" b
+cond do
+	$1 -> $2
+	true -> $3
+end
+endsnippet
+
+snippet if "If statement" b
+if $1 do
+	$2
+end
+endsnippet
+
+snippet ife "If / else statement" b
+if $1 do
+	$2
+else
+	$3
+end
+endsnippet
+
+snippet test "Test case" b
+test "$1", %{$2: $2} do
+	$3
+end
+endsnippet
+
+snippet ass "Assert clause" b
+assert $1 == $2
+endsnippet
+
+snippet setup "Test setup clause" b
+setup do
+	$1
+	%{$2: $2}
+end
+endsnippet
