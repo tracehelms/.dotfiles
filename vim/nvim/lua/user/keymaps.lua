@@ -1,4 +1,4 @@
-local opts = { noremap = true } -- , silent = true }
+local opts = { noremap = true , silent = true }
 
 -- local term_opts = { silent = true }
 
@@ -66,10 +66,10 @@ keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
 -- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+-- keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
+-- keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+-- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+-- keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Terminal --
 -- Better terminal navigation
@@ -83,8 +83,24 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 vim.api.nvim_set_keymap("n", "<Leader>ue", "UltiSnipsEdit<CR>", opts)
 
 
+-- fzf
+vim.keymap.set("n", "<Bslash>", "<cmd>lua require('fzf-lua').files()<CR>", opts)
+vim.keymap.set("n", "<Leader>b", "<cmd>lua require('fzf-lua').buffers()<CR>", opts)
 
 
+
+
+-- Comments
+-- Toggle in normal mode
+vim.keymap.set('n', '<Leader>c', '<Plug>(comment_toggle_linewise_current)') 
+
+-- Toggle in visual mode
+vim.keymap.set('x', '<Leader>c', '<Plug>(comment_toggle_linewise_visual)')
+
+
+-- Searching
+vim.keymap.set("n", "<Leader>a", ":Find<SPACE>", opts)
+vim.keymap.set("n", "<Leader>k", [[:grep! "\b<C-R><C-W>\b"<CR>:cw<CR>]], opts)
 
 
 
