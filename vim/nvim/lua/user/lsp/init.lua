@@ -1,30 +1,12 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
 
--- Automatic language server setup
--- From :h mason-lspconfig-automatic-server-setup
-require("mason-lspconfig").setup_handlers {
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
-  function (server_name) -- default handler (optional)
-      require("lspconfig")[server_name].setup {}
-  end,
-  -- Next, you can provide a dedicated handler for specific servers.
-  -- For example, a handler override for the `rust_analyzer`:
---  ["rust_analyzer"] = function ()
---      require("rust-tools").setup {}
---  end
-}
+-- Set up LSP servers
+require("lspconfig").tsserver.setup {}
+require("lspconfig").rust_analyzer.setup {}
 
--- Alternatively, simpler: 
--- After setting up mason-lspconfig you may set up servers via lspconfig
--- require("lspconfig").lua_ls.setup {}
--- require("lspconfig").rust_analyzer.setup {}
-
-
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require("null-ls")
-
 null_ls.setup({
     sources = {
         null_ls.builtins.formatting.stylua,
@@ -33,8 +15,22 @@ null_ls.setup({
         -- null_ls.builtins.completion.spell,
         null_ls.builtins.formatting.trim_whitespace
     },
+    -- format files on save
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+                    -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+                    vim.lsp.buf.format({ async = false })
+                end,
+            })
+        end
+    end,
 })
-
 
 local signs = {
   { name = "DiagnosticSignError", text = "" },
@@ -49,36 +45,20 @@ end
 
 
 vim.diagnostic.config({
+  virtual_text = false,
   -- show signs
   signs = {
     active = signs,
   },
-  update_in_insert = true,
+  update_in_insert = false,
   underline = true,
-  -- float = {
-  --   focusable = false,
-  --   style = "minimal",
-  --   border = "rounded",
-  --   source = "always",
-  --   header = "",
-  --   prefix = "",
-  -- },
 })
-
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
---   border = "rounded",
--- })
---
--- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
---   border = "rounded",
--- })
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<Leader>dq', vim.diagnostic.setloclist)
+vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev({float = false}) end)
+vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({float = false}) end)
+-- vim.keymap.set('n', '<Leader>dq', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -110,3 +90,18 @@ vim.keymap.set('n', '<Leader>dq', vim.diagnostic.setloclist)
 --     end, opts)
 --   end,
 -- })
+
+
+-- Don't show messages in a floating window
+require("echo-diagnostics").setup{
+  show_diagnostic_number = true,
+  show_diagnostic_source = false,
+}
+
+vim.opt.updatetime = 300
+vim.api.nvim_create_autocmd('CursorHold', { 
+  pattern = "*",
+  callback = function() require('echo-diagnostics').echo_line_diagnostic() end
+})
+-- This will echo the entire diagnostic message. Should prompt you with Press ENTER or type command to continue.
+vim.keymap.set("n", "<Leader>d", '<cmd>lua require("echo-diagnostics").echo_entire_diagnostic()<CR>')

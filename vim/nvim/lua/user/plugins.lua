@@ -29,15 +29,6 @@ if not status_ok then
   return
 end
 
--- Have packer use a popup window
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-  },
-}
-
 -- Install your plugins here
 return packer.startup(function(use)
   -- My plugins here
@@ -61,6 +52,7 @@ return packer.startup(function(use)
   use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
   use 'jose-elias-alvarez/null-ls.nvim'
+  use 'seblj/nvim-echo-diagnostics'
 
   -- other
   use {
