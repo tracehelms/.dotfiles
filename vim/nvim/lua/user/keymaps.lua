@@ -92,7 +92,7 @@ vim.keymap.set("n", "<Leader>b", "<cmd>lua require('fzf-lua').buffers()<CR>", op
 
 -- Comments
 -- Toggle in normal mode
-vim.keymap.set('n', '<Leader>c', '<Plug>(comment_toggle_linewise_current)') 
+vim.keymap.set('n', '<Leader>c', '<Plug>(comment_toggle_linewise_current)')
 
 -- Toggle in visual mode
 vim.keymap.set('x', '<Leader>c', '<Plug>(comment_toggle_linewise_visual)')
@@ -103,7 +103,11 @@ vim.keymap.set("n", "<Leader>a", ":Find<SPACE>", opts)
 vim.keymap.set("n", "<Leader>k", [[:grep! "\b<C-R><C-W>\b"<CR>:cw<CR>]], opts)
 
 
-
+-- Testing
+vim.keymap.set("n", "<leader>tt", ":TestNearest<CR>", opts) -- Test This
+vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", opts) -- Test File
+vim.keymap.set("n", "<leader>ta", ":TestSuite<CR>", opts) -- Test All
+vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", opts) -- Test Last
 
 
 

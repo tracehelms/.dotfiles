@@ -1,35 +1,52 @@
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = {
+    "lua_ls",
+    "rust_analyzer",
+    "tsserver",
+  }
+})
 
 -- Set up LSP servers
 require("lspconfig").tsserver.setup {}
 require("lspconfig").rust_analyzer.setup {}
+require("lspconfig").lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+    },
+  }
+}
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require("null-ls")
 null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.formatting.eslint,
-        -- null_ls.builtins.completion.spell,
-        null_ls.builtins.formatting.trim_whitespace
-    },
-    -- format files on save
-    on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-                    -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-                    vim.lsp.buf.format({ async = false })
-                end,
-            })
-        end
-    end,
+  sources = {
+    -- null_ls.builtins.formatting.stylua,
+    null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.formatting.eslint,
+    -- null_ls.builtins.completion.spell,
+    null_ls.builtins.formatting.trim_whitespace
+  },
+  -- format files on save
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+          -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+          vim.lsp.buf.format({ async = false })
+        end,
+      })
+    end
+  end,
 })
 
 local signs = {
@@ -56,8 +73,8 @@ vim.diagnostic.config({
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev({float = false}) end)
-vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({float = false}) end)
+vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev({ float = false }) end)
+vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({ float = false }) end)
 -- vim.keymap.set('n', '<Leader>dq', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
@@ -93,13 +110,13 @@ vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({float = false}) e
 
 
 -- Don't show messages in a floating window
-require("echo-diagnostics").setup{
+require("echo-diagnostics").setup {
   show_diagnostic_number = true,
   show_diagnostic_source = false,
 }
 
 vim.opt.updatetime = 300
-vim.api.nvim_create_autocmd('CursorHold', { 
+vim.api.nvim_create_autocmd('CursorHold', {
   pattern = "*",
   callback = function() require('echo-diagnostics').echo_line_diagnostic() end
 })

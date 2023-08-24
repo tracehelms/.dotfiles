@@ -70,6 +70,11 @@ return packer.startup(function(use)
     -- optional for icon support
     requires = { "nvim-tree/nvim-web-devicons" }
   }
+  use "tpope/vim-surround"
+  use "tpope/vim-fugitive"
+  use 'vim-test/vim-test'
+
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
