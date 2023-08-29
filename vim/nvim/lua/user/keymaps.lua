@@ -1,4 +1,4 @@
-local opts = { noremap = true , silent = true }
+local opts = { noremap = true, silent = true }
 
 -- local term_opts = { silent = true }
 
@@ -19,9 +19,9 @@ vim.g.maplocalleader = ","
 
 -- Normal --
 -- Saving & quitting
-keymap("n", "<Leader>w", ":retab<bar>:w<cr>", opts) -- changes tabs to spaces and save
+keymap("n", "<Leader>w", ":retab<bar>:w<cr>", opts)   -- changes tabs to spaces and save
 keymap("n", "<Leader>wq", ":retab<bar>:wq<cr>", opts) -- changes tabs to spaces, saves, and quits
-keymap("n", "<Leader>q", ":q<cr>", opts) -- quit
+keymap("n", "<Leader>q", ":q<cr>", opts)              -- quit
 
 -- Colemak window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -99,15 +99,15 @@ vim.keymap.set('x', '<Leader>c', '<Plug>(comment_toggle_linewise_visual)')
 
 
 -- Searching
-vim.keymap.set("n", "<Leader>a", ":Find<SPACE>", opts)
+vim.keymap.set("n", "<Leader>a", ":Find -i ", { noremap = false })
 vim.keymap.set("n", "<Leader>k", [[:grep! "\b<C-R><C-W>\b"<CR>:cw<CR>]], opts)
 
 
 -- Testing
 vim.keymap.set("n", "<leader>tt", ":TestNearest<CR>", opts) -- Test This
-vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", opts) -- Test File
-vim.keymap.set("n", "<leader>ta", ":TestSuite<CR>", opts) -- Test All
-vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", opts) -- Test Last
+vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", opts)    -- Test File
+vim.keymap.set("n", "<leader>ta", ":TestSuite<CR>", opts)   -- Test All
+vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", opts)    -- Test Last
 
 
 

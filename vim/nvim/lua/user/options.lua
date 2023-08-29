@@ -8,8 +8,8 @@ vim.opt.expandtab = true               -- convert tabs to spaces
 vim.opt.fileencoding = "utf-8"         -- the encoding written to a file
 vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = "syntax"
-vim.opt.hlsearch = true   -- highlight all matches on previous search pattern
-vim.opt.ignorecase = true -- ignore case in search patterns
+vim.opt.hlsearch = true    -- highlight all matches on previous search pattern
+vim.opt.ignorecase = false -- ignore case in search patterns
 vim.opt.iskeyword:append "-"
 vim.opt.listchars.tab = "»"
 vim.opt.listchars.trail = "·"
@@ -54,7 +54,7 @@ vim.opt.wrap = true             -- wrap lines
 
 -- Use ripgrep
 if vim.fn.executable('rg') == 1 then
-  vim.opt.grepprg = "rg --vimgrep --ignore-case --hidden --no-column"
+  vim.opt.grepprg = "rg --vimgrep --hidden --no-column"
 end
 -- Define ripgrep :Find search command
 vim.cmd [[command! -nargs=+ Find execute 'silent grep! <args>' | copen]]
