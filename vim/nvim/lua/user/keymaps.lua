@@ -110,7 +110,8 @@ vim.keymap.set("n", "<leader>ta", ":TestSuite<CR>", opts)   -- Test All
 vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", opts)    -- Test Last
 
 
-
+-- Clipboard manipulation
+vim.keymap.set("n", "<leader>yfn", ':let @* = expand("%")<CR>', opts) -- Yank file name to clipboard
 
 
 

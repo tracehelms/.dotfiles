@@ -20,7 +20,7 @@ export const $1 = ($2) => {
 };
 endsnippet
 
-snippet af "Arrow function" b
+snippet af "Arrow function"
 ($1) => ${2:{$3}}
 endsnippet
 
@@ -99,6 +99,12 @@ endsnippet
 
 snippet test "Test block" b
 test('$1', ${2: async }() => {
+	$3
+});
+endsnippet
+
+snippet it "It block" b
+it('$1', ${2: async }() => {
 	$3
 });
 endsnippet

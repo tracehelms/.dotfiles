@@ -43,8 +43,9 @@ set -x PATH "$HOME/.serverless/bin:$PATH"
 # asdf
 source $HOME/.asdf/asdf.fish
 
-# Godot
-export PATH="/Applications/Godot.app/Contents/MacOS:$PATH"
+# Homebrew keg-only installs
+set -x PATH "/opt/homebrew/opt/postgresql@13/bin:$PATH"
+set -x PATH "/opt/homebrew/opt/redis@6.2/bin:$PATH"
 
 
 ############################
@@ -61,8 +62,6 @@ export PATH="/Applications/Godot.app/Contents/MacOS:$PATH"
 # Use ripgrep by default with fzf (vim fuzzy file searcher)
 set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 
-# GetThru
-set -x PRIVATE_KEY_PATH ~/.ssh/id_rsa
 
 
 #####################

@@ -7,10 +7,17 @@ require("mason-lspconfig").setup({
   }
 })
 
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 -- Set up LSP servers
-require("lspconfig").tsserver.setup {}
-require("lspconfig").rust_analyzer.setup {}
+require("lspconfig").tsserver.setup {
+  capabilities = capabilities
+}
+require("lspconfig").rust_analyzer.setup {
+  capabilities = capabilities
+}
 require("lspconfig").lua_ls.setup {
+  capabilities = capabilities,
   settings = {
     Lua = {
       diagnostics = {
@@ -25,28 +32,30 @@ require("lspconfig").lua_ls.setup {
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require("null-ls")
 null_ls.setup({
+  -- debug = true,
   sources = {
     -- null_ls.builtins.formatting.stylua,
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.formatting.eslint,
+    null_ls.builtins.formatting.prettier,
     -- null_ls.builtins.completion.spell,
     null_ls.builtins.formatting.trim_whitespace
   },
   -- format files on save
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-          -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-    end
-  end,
+  -- on_attach = function(client, bufnr)
+  --   if client.supports_method("textDocument/formatting") then
+  --     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+  --     vim.api.nvim_create_autocmd("BufWritePre", {
+  --       group = augroup,
+  --       buffer = bufnr,
+  --       callback = function()
+  --         -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+  --         -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+  --         vim.lsp.buf.format({ async = false, timeout_ms = 2000 })
+  --       end,
+  --     })
+  --   end
+  -- end,
 })
 
 local signs = {
@@ -79,34 +88,35 @@ vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({ float = false })
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
--- vim.api.nvim_create_autocmd('LspAttach', {
---   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
---   callback = function(ev)
---     -- Enable completion triggered by <c-x><c-o>
---     -- vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
---
---     -- Buffer local mappings.
---     -- See `:help vim.lsp.*` for documentation on any of the below functions
---     local opts = { buffer = ev.buf }
---     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
---     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
---     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
---     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
---     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
---     -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
---     -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
---     -- vim.keymap.set('n', '<space>wl', function()
---     --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
---     -- end, opts)
---     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
---     -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
---     -- vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
---     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
---     -- vim.keymap.set('n', '<space>f', function()
---       vim.lsp.buf.format { async = true }
---     end, opts)
---   end,
--- })
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    -- vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gd', ':vsplit | lua vim.lsp.buf.definition()<CR>', opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    -- vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+    -- vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    -- vim.keymap.set('n', '<Leader>wl', function()
+    --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    -- end, opts)
+    vim.keymap.set('n', '<Leader>D', ':vsplit | vim.lsp.buf.type_definition()<CR>', opts)
+    -- vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
+    -- vim.keymap.set({ 'n', 'v' }, '<Leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    -- vim.keymap.set('n', '<Leader>f', function()
+    --   vim.lsp.buf.format { async = true }
+    -- end, opts)
+  end,
+})
 
 
 -- Don't show messages in a floating window

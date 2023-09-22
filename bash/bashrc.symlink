@@ -54,6 +54,11 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Godot
 export PATH="/Applications/Godot.app/Contents/MacOS:$PATH"
 
+# Homebrew keg-only installs
+export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
+export PATH="/opt/homebrew/opt/redis@6.2/bin:$PATH"
+
+
 
 ############################
 #  Variables and Settings  #
@@ -69,8 +74,8 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # Use ripgrep by default with fzf (vim fuzzy file searcher)
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
-# GetThru
-export PRIVATE_KEY_PATH=~/.ssh/id_rsa
+# RVOH
+. ~/.secrets.bash
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"

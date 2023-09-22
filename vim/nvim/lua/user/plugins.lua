@@ -33,15 +33,16 @@ end
 return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "RRethy/nvim-base16" -- Lots of base16 colorschemes
+  use "nvim-lua/popup.nvim"    -- An implementation of the Popup API from vim in Neovim
+  use "nvim-lua/plenary.nvim"  -- Useful lua functions used ny lots of plugins
+  use "RRethy/nvim-base16"     -- Lots of base16 colorschemes
 
   -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "hrsh7th/nvim-cmp"     -- The completion plugin
+  use "hrsh7th/cmp-nvim-lsp" -- lsp completions
+  use "hrsh7th/cmp-buffer"   -- buffer completions
+  use "hrsh7th/cmp-path"     -- path completions
+  use "hrsh7th/cmp-cmdline"  -- cmdline completions
 
   -- snippets
   use 'SirVer/ultisnips'
@@ -58,7 +59,7 @@ return packer.startup(function(use)
   use {
     'numToStr/Comment.nvim',
     config = function()
-        require('Comment').setup()
+      require('Comment').setup()
     end
   }
   use "preservim/nerdtree"
