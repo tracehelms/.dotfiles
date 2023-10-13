@@ -14,6 +14,12 @@ const $1 = ($2) => {
 };
 endsnippet
 
+snippet conaf "Const async function" b
+const $1 = async ($2) => {
+	$3
+};
+endsnippet
+
 snippet econf "Const function" b
 export const $1 = ($2) => {
 	$3
@@ -22,6 +28,22 @@ endsnippet
 
 snippet af "Arrow function"
 ($1) => ${2:{$3}}
+endsnippet
+
+snippet aaf "Async arrow function"
+async ($1) => ${2:{$3}}
+endsnippet
+
+snippet fun "Class function"
+function $1($2)${3:: $4} {
+	$5
+}
+endsnippet
+
+snippet afun "Async class function"
+async function $1($2)${3:: $4} {
+	$5
+}
 endsnippet
 
 snippet let "Let variable" b
@@ -40,20 +62,20 @@ snippet export "Export" b
 export { $1 };
 endsnippet
 
-snippet cla "Class" b
-class $1 {
-	constructor($2) {
-		$3
-	}
+snippet cla "Class"
+class $1 ${2:extends $3} {
+	${4:constructor($5) {
+		$6
+	}}
 }
 endsnippet
 
-snippet ecla "Export class" b
-export class $1 {
-	constructor($2) {
-		$3
-	}
-}
+snippet ex "Export" b
+export $1
+endsnippet
+
+snippet exd "Export default" b
+export default $1
 endsnippet
 
 snippet for "Basic For loop" b
@@ -106,6 +128,18 @@ endsnippet
 snippet it "It block" b
 it('$1', ${2: async }() => {
 	$3
+});
+endsnippet
+
+snippet bef "Before each block" b
+beforeEach(${2: async }() => {
+	$0
+});
+endsnippet
+
+snippet aft "After each block" b
+afterEach(${2: async }() => {
+	$0
 });
 endsnippet
 

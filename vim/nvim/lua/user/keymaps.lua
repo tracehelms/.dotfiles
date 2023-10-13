@@ -34,6 +34,9 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Code toggle folding
+keymap("n", "<space>", "za", opts)
+
 -- Easier maximize split
 keymap("n", "<C-\\>", "<C-W><bar>", opts)
 keymap("n", "<C-=>", "<C-W>=", opts)
@@ -63,6 +66,8 @@ keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 
 -- Don't yank text that is pasted over
 keymap("v", "p", '"_dP', opts)
+-- Copy to clipboard
+keymap("v", "Y", '"*y', opts)
 
 -- Visual Block --
 -- Move text up and down
@@ -111,7 +116,7 @@ vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", opts)    -- Test Last
 
 
 -- Clipboard manipulation
-vim.keymap.set("n", "<leader>yfn", ':let @* = expand("%")<CR>', opts) -- Yank file name to clipboard
+vim.keymap.set("n", "<leader>yf", ':let @* = expand("%")<CR>', opts) -- Yank file name to clipboard
 
 
 
