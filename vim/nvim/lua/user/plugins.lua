@@ -52,7 +52,7 @@ return packer.startup(function(use)
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
-  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'jose-elias-alvarez/null-ls.nvim' -- TODO update to none-ls since null-ls is abandoned
   use 'seblj/nvim-echo-diagnostics'
 
   -- other
@@ -67,7 +67,7 @@ return packer.startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
-  use { "ibhagwan/fzf-lua",
+  use { "ibhagwan/fzf-lua", -- TODO upgrade to https://github.com/nvim-telescope/telescope.nvim
     -- optional for icon support
     requires = { "nvim-tree/nvim-web-devicons" }
   }

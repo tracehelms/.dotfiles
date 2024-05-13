@@ -8,11 +8,11 @@ disabled = true
 [elixir]
 disabled = true
 
-[nodejs]
-disabled = true
-
 [package]
 disabled = true
 
 [aws]
 disabled = true
+
+[git_status]
+stashed = ""
