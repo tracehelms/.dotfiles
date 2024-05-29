@@ -52,7 +52,8 @@ return packer.startup(function(use)
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
-  use 'jose-elias-alvarez/null-ls.nvim' -- TODO update to none-ls since null-ls is abandoned
+  use 'nvimtools/none-ls.nvim'
+  use "nvimtools/none-ls-extras.nvim"
   use 'seblj/nvim-echo-diagnostics'
 
   -- other

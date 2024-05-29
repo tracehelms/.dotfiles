@@ -10,8 +10,8 @@ vim.opt.foldmethod = "syntax"
 vim.opt.hlsearch = true    -- highlight all matches on previous search pattern
 vim.opt.ignorecase = false -- ignore case in search patterns
 vim.opt.iskeyword:append "-"
-vim.opt.listchars.tab = "»"
-vim.opt.listchars.trail = "·"
+vim.opt.list = true
+vim.opt.listchars = { trail = '·', tab = '>~' }
 vim.opt.mouse = "a"             -- allow the mouse to be used in neovim
 vim.opt.number = true           -- set numbered lines
 vim.opt.ruler = true            -- show row,col of cursor in bottom corner
@@ -27,6 +27,16 @@ vim.opt.termguicolors = true    -- set term gui colors (most terminals support t
 vim.opt.title = false           -- dont show a title bar at the top
 vim.opt.undodir = "~/.vim/undo" -- Trace: do I need this?
 vim.opt.wrap = true             -- wrap lines
+
+-- trim trailing whitespace
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = {"*"},
+    callback = function()
+      local save_cursor = vim.fn.getpos(".")
+      pcall(function() vim.cmd [[%s/\s\+$//e]] end)
+      vim.fn.setpos(".", save_cursor)
+    end,
+})
 -- vim.cmd "set whichwrap+=<,>,[,],h,l"
 -- vim.cmd [[set iskeyword+=-]]
 -- vim.opt.backup = false                          -- creates a backup file

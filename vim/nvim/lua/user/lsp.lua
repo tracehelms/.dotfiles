@@ -3,7 +3,7 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
     "rust_analyzer",
-    "tsserver",
+    "tsserver"
   }
 })
 
@@ -35,11 +35,14 @@ null_ls.setup({
   -- debug = true,
   sources = {
     -- null_ls.builtins.formatting.stylua,
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.formatting.eslint,
+    -- null_ls.builtins.diagnostics.eslint,
+    -- null_ls.builtins.formatting.eslint,
     null_ls.builtins.formatting.prettier,
     -- null_ls.builtins.completion.spell,
-    null_ls.builtins.formatting.trim_whitespace
+    -- null_ls.builtins.formatting.trim_whitespace
+    require("none-ls.diagnostics.eslint_d"),
+    require("none-ls.formatting.eslint_d"),
+    require("none-ls.code_actions.eslint_d"),
   },
   -- format files on save
   on_attach = function(client, bufnr)
@@ -98,8 +101,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gd', ':vsplit | lua vim.lsp.buf.definition()<CR>', opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gsd', ':vsplit | lua vim.lsp.buf.definition()<CR>', opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
@@ -108,7 +111,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- vim.keymap.set('n', '<Leader>wl', function()
     --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     -- end, opts)
-    vim.keymap.set('n', '<Leader>D', ':vsplit | vim.lsp.buf.type_definition()<CR>', opts)
+    -- vim.keymap.set('n', '<Leader>D', ':vsplit | vim.lsp.buf.type_definition()<CR>', opts)
     -- vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
     -- vim.keymap.set({ 'n', 'v' }, '<Leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
