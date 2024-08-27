@@ -105,6 +105,11 @@ _G.packer_plugins = {
     path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  ["conform.nvim"] = {
+    loaded = true,
+    path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/conform.nvim",
+    url = "https://github.com/stevearc/conform.nvim"
+  },
   ["fzf-lua"] = {
     loaded = true,
     path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/fzf-lua",
@@ -130,16 +135,6 @@ _G.packer_plugins = {
     path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/nerdtree",
     url = "https://github.com/preservim/nerdtree"
   },
-  ["none-ls-extras.nvim"] = {
-    loaded = true,
-    path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/none-ls-extras.nvim",
-    url = "https://github.com/nvimtools/none-ls-extras.nvim"
-  },
-  ["none-ls.nvim"] = {
-    loaded = true,
-    path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/none-ls.nvim",
-    url = "https://github.com/nvimtools/none-ls.nvim"
-  },
   ["nvim-base16"] = {
     loaded = true,
     path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/nvim-base16",
@@ -154,6 +149,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/nvim-echo-diagnostics",
     url = "https://github.com/seblj/nvim-echo-diagnostics"
+  },
+  ["nvim-lint"] = {
+    loaded = true,
+    path = "/Users/shelms/.local/share/nvim/site/pack/packer/start/nvim-lint",
+    url = "https://github.com/mfussenegger/nvim-lint"
   },
   ["nvim-lspconfig"] = {
     loaded = true,

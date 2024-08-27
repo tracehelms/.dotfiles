@@ -52,9 +52,11 @@ return packer.startup(function(use)
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
-  use 'nvimtools/none-ls.nvim'
-  use "nvimtools/none-ls-extras.nvim"
   use 'seblj/nvim-echo-diagnostics'
+  use 'mfussenegger/nvim-lint'
+  use({
+    "stevearc/conform.nvim",
+  })
 
   -- other
   use {

@@ -28,15 +28,6 @@ vim.opt.title = false           -- dont show a title bar at the top
 vim.opt.undodir = "~/.vim/undo" -- Trace: do I need this?
 vim.opt.wrap = true             -- wrap lines
 
--- trim trailing whitespace
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    pattern = {"*"},
-    callback = function()
-      local save_cursor = vim.fn.getpos(".")
-      pcall(function() vim.cmd [[%s/\s\+$//e]] end)
-      vim.fn.setpos(".", save_cursor)
-    end,
-})
 -- vim.cmd "set whichwrap+=<,>,[,],h,l"
 -- vim.cmd [[set iskeyword+=-]]
 -- vim.opt.backup = false                          -- creates a backup file

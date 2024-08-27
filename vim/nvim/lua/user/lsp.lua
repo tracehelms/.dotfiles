@@ -3,15 +3,30 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
     "rust_analyzer",
-    "tsserver"
+    "tsserver",
   }
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+function My_organize_imports()
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = {vim.api.nvim_buf_get_name(0)},
+    title = ""
+  }
+  vim.lsp.buf.execute_command(params)
+end
+
 -- Set up LSP servers
 require("lspconfig").tsserver.setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  commands = {
+    OrganizeImports = {
+      My_organize_imports,
+      description = "Organize Imports"
+    }
+  }
 }
 require("lspconfig").rust_analyzer.setup {
   capabilities = capabilities
@@ -29,36 +44,73 @@ require("lspconfig").lua_ls.setup {
   }
 }
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local null_ls = require("null-ls")
-null_ls.setup({
-  -- debug = true,
-  sources = {
-    -- null_ls.builtins.formatting.stylua,
-    -- null_ls.builtins.diagnostics.eslint,
-    -- null_ls.builtins.formatting.eslint,
-    null_ls.builtins.formatting.prettier,
-    -- null_ls.builtins.completion.spell,
-    -- null_ls.builtins.formatting.trim_whitespace
-    require("none-ls.diagnostics.eslint_d"),
-    require("none-ls.formatting.eslint_d"),
-    require("none-ls.code_actions.eslint_d"),
-  },
-  -- format files on save
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-          -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-          vim.lsp.buf.format({ async = false, timeout_ms = 2000 })
-        end,
-      })
-    end
+-- linting
+local lint = require("lint")
+lint.linters_by_ft = {
+  javascript = { "eslint_d" },
+  typescript = { "eslint_d" },
+  javascriptreact = { "eslint_d" },
+  typescriptreact = { "eslint_d" },
+  -- svelte = { "eslint_d" },
+  -- kotlin = { "ktlint" },
+  -- terraform = { "tflint" },
+  -- ruby = { "standardrb" },
+}
+
+local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+  group = lint_augroup,
+  callback = function()
+    lint.try_lint()
   end,
+})
+
+-- formatting
+require("conform").setup {
+  formatters_by_ft = {
+    -- lua = { "stylua" },
+    -- svelte = { { "prettierd", "prettier" } },
+    javascript = { "prettier" },
+    typescript = { { "prettier" } },
+    javascriptreact = { { "prettier" } },
+    typescriptreact = { { "prettier" } },
+    json = { { "prettier" } },
+    -- graphql = { { "prettierd", "prettier" } },
+    -- java = { "google-java-format" },
+    -- kotlin = { "ktlint" },
+    -- ruby = { "standardrb" },
+    -- markdown = { { "prettierd", "prettier" } },
+    -- erb = { "htmlbeautifier" },
+    -- html = { "htmlbeautifier" },
+    -- bash = { "beautysh" },
+    -- proto = { "buf" },
+    -- rust = { "rustfmt" },
+    -- yaml = { "yamlfix" },
+    -- toml = { "taplo" },
+    css = { { "prettier" } },
+    scss = { { "prettier" } },
+  },
+}
+
+-- auto-format on save with conform
+local format_augroup = vim.api.nvim_create_augroup("format", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = format_augroup,
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})
+
+-- trim trailing whitespace
+local whitespace_augroup = vim.api.nvim_create_augroup("whitespace", { clear = true })
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = whitespace_augroup,
+    pattern = {"*"},
+    callback = function()
+      local save_cursor = vim.fn.getpos(".")
+      pcall(function() vim.cmd [[%s/\s\+$//e]] end)
+      vim.fn.setpos(".", save_cursor)
+    end,
 })
 
 local signs = {
@@ -103,7 +155,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gsd', ':vsplit | lua vim.lsp.buf.definition()<CR>', opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'T', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
     -- vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, opts)
@@ -125,7 +177,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Don't show messages in a floating window
 require("echo-diagnostics").setup {
   show_diagnostic_number = true,
-  show_diagnostic_source = false,
+  show_diagnostic_source = true,
 }
 
 vim.opt.updatetime = 300

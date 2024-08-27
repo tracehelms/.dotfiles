@@ -29,6 +29,27 @@ keymap("n", "<C-n>", "<C-w>j", opts)
 keymap("n", "<C-e>", "<C-w>k", opts)
 keymap("n", "<C-i>", "<C-w>l", opts)
 
+-- from https://www.ryanheise.com/colemak/
+-- noremap n j|noremap <C-w>n <C-w>j|noremap <C-w><C-n> <C-w>j
+-- noremap e k|noremap <C-w>e <C-w>k|noremap <C-w><C-e> <C-w>k
+-- noremap s h
+-- noremap t l
+--
+-- noremap f e
+-- noremap k n
+-- noremap K N
+-- noremap U <C-r>
+
+keymap("n", "n", "j", opts)
+keymap("n", "e", "k", opts)
+keymap("n", "s", "h", opts)
+keymap("n", "t", "l", opts)
+
+keymap("n", "f", "e", opts)
+keymap("n", "k", "n", opts)
+keymap("n", "K", "N", opts)
+keymap("n", "U", "<C-r>", opts)
+
 -- Qwerty window navigation
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
