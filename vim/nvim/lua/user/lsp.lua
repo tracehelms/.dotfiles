@@ -26,7 +26,10 @@ require("lspconfig").tsserver.setup {
       My_organize_imports,
       description = "Organize Imports"
     }
-  }
+  },
+  -- on_attach = function(client, bufnr)
+  --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  -- end
 }
 require("lspconfig").rust_analyzer.setup {
   capabilities = capabilities
@@ -51,6 +54,7 @@ lint.linters_by_ft = {
   typescript = { "eslint_d" },
   javascriptreact = { "eslint_d" },
   typescriptreact = { "eslint_d" },
+  -- rust = { "clippy" },
   -- svelte = { "eslint_d" },
   -- kotlin = { "ktlint" },
   -- terraform = { "tflint" },
@@ -84,7 +88,7 @@ require("conform").setup {
     -- html = { "htmlbeautifier" },
     -- bash = { "beautysh" },
     -- proto = { "buf" },
-    -- rust = { "rustfmt" },
+    rust = { "rustfmt" },
     -- yaml = { "yamlfix" },
     -- toml = { "taplo" },
     css = { { "prettier" } },

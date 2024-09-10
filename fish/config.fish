@@ -88,3 +88,7 @@ starship init fish | source
 
 # set SPACEFISH_PROMPT_DEFAULT_PREFIX 'with '
 # set SPACEFISH_PACKAGE_SHOW false
+
+
+# RVO Health / Dream specific
+set -x DREAM_PARALLEL_TESTS '8'

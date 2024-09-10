@@ -23,32 +23,65 @@ keymap("n", "<Leader>w", ":retab<bar>:w<cr>", opts)   -- changes tabs to spaces 
 keymap("n", "<Leader>wq", ":retab<bar>:wq<cr>", opts) -- changes tabs to spaces, saves, and quits
 keymap("n", "<Leader>q", ":q<cr>", opts)              -- quit
 
--- Colemak window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-n>", "<C-w>j", opts)
-keymap("n", "<C-e>", "<C-w>k", opts)
-keymap("n", "<C-i>", "<C-w>l", opts)
+-- Colemak / Qwerty switching
+vim.g.colemak_mode = true
 
--- from https://www.ryanheise.com/colemak/
--- noremap n j|noremap <C-w>n <C-w>j|noremap <C-w><C-n> <C-w>j
--- noremap e k|noremap <C-w>e <C-w>k|noremap <C-w><C-e> <C-w>k
--- noremap s h
--- noremap t l
---
--- noremap f e
--- noremap k n
--- noremap K N
--- noremap U <C-r>
+function Toggle_colemak()
+  if vim.g.colemak_mode then
+    vim.g.colemak_mode = false
+    print("Changing to Qwerty mode...")
+  else
+    vim.g.colemak_mode = true
+    print("Changing to Colemak mode...")
+  end
+end
 
-keymap("n", "n", "j", opts)
-keymap("n", "e", "k", opts)
-keymap("n", "s", "h", opts)
-keymap("n", "t", "l", opts)
+function Set_keymaps()
+  if vim.g.colemak_mode then
+    -- Colemak movement bindings
+    -- from https://www.ryanheise.com/colemak/
+    keymap("n", "n", "j", opts)
+    keymap("n", "e", "k", opts)
+    keymap("n", "s", "h", opts)
+    keymap("n", "t", "l", opts)
+    keymap("v", "n", "j", opts)
+    keymap("v", "e", "k", opts)
+    keymap("v", "s", "h", opts)
+    keymap("v", "t", "l", opts)
+    keymap("n", "f", "e", opts)
+    keymap("v", "f", "e", opts)
+    keymap("n", "k", "n", opts)
+    keymap("n", "K", "N", opts)
 
-keymap("n", "f", "e", opts)
-keymap("n", "k", "n", opts)
-keymap("n", "K", "N", opts)
-keymap("n", "U", "<C-r>", opts)
+    -- Colemak window navigation
+    keymap("n", "<C-h>", "<C-w>h", opts)
+    keymap("n", "<C-n>", "<C-w>j", opts)
+    keymap("n", "<C-e>", "<C-w>k", opts)
+    keymap("n", "<C-i>", "<C-w>l", opts)
+  else
+    keymap("n", "n", "n", opts)
+    keymap("n", "e", "e", opts)
+    keymap("n", "s", "s", opts)
+    keymap("n", "t", "t", opts)
+    keymap("v", "n", "n", opts)
+    keymap("v", "e", "e", opts)
+    keymap("v", "s", "s", opts)
+    keymap("v", "t", "t", opts)
+    keymap("n", "f", "f", opts)
+    keymap("v", "f", "f", opts)
+    keymap("n", "k", "k", opts)
+    keymap("n", "K", "K", opts)
+
+    -- window navigation
+    keymap("n", "<C-h>", "<C-w>h", opts)
+    keymap("n", "<C-j>", "<C-w>j", opts)
+    keymap("n", "<C-k>", "<C-w>k", opts)
+    keymap("n", "<C-l>", "<C-w>l", opts)
+  end
+end
+
+Set_keymaps()
+vim.keymap.set("n", "<Leader>z", "<cmd>lua Toggle_colemak(); Set_keymaps()<CR>", opts)
 
 -- Qwerty window navigation
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -89,6 +122,8 @@ keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 -- Copy to clipboard
 keymap("v", "Y", '"*y', opts)
+-- easier undo
+keymap("n", "U", "<C-r>", opts)
 
 -- Visual Block --
 -- Move text up and down
