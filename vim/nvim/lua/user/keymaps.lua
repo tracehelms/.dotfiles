@@ -178,6 +178,8 @@ vim.keymap.set("n", "<leader>yf", ':let @* = expand("%")<CR>', opts) -- Yank fil
 
 
 
+vim.g.NERDTreeMapOpenExpl = "v"
+
 
 
 

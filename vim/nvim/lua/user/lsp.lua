@@ -12,7 +12,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 function My_organize_imports()
   local params = {
     command = "_typescript.organizeImports",
-    arguments = {vim.api.nvim_buf_get_name(0)},
+    arguments = { vim.api.nvim_buf_get_name(0) },
     title = ""
   }
   vim.lsp.buf.execute_command(params)
@@ -71,6 +71,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 
 -- formatting
 require("conform").setup {
+  format_after_save = {
+    lsp_fallback = true,
+    timeout_ms = 500,
+  },
   formatters_by_ft = {
     -- lua = { "stylua" },
     -- svelte = { { "prettierd", "prettier" } },
@@ -96,25 +100,25 @@ require("conform").setup {
   },
 }
 
--- auto-format on save with conform
-local format_augroup = vim.api.nvim_create_augroup("format", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = format_augroup,
-  callback = function(args)
-    require("conform").format({ bufnr = args.buf })
-  end,
-})
+-- -- auto-format on save with conform
+-- local format_augroup = vim.api.nvim_create_augroup("format", { clear = true })
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   group = format_augroup,
+--   callback = function(args)
+--     require("conform").format({ bufnr = args.buf })
+--   end,
+-- })
 
 -- trim trailing whitespace
 local whitespace_augroup = vim.api.nvim_create_augroup("whitespace", { clear = true })
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = whitespace_augroup,
-    pattern = {"*"},
-    callback = function()
-      local save_cursor = vim.fn.getpos(".")
-      pcall(function() vim.cmd [[%s/\s\+$//e]] end)
-      vim.fn.setpos(".", save_cursor)
-    end,
+  pattern = { "*" },
+  callback = function()
+    local save_cursor = vim.fn.getpos(".")
+    pcall(function() vim.cmd [[%s/\s\+$//e]] end)
+    vim.fn.setpos(".", save_cursor)
+  end,
 })
 
 local signs = {
@@ -128,6 +132,21 @@ for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
+local _border = "single"
+
+-- borders on popus
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = _border
+  }
+)
+
+-- borders on popus
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = _border
+  }
+)
 
 vim.diagnostic.config({
   virtual_text = false,
@@ -137,6 +156,9 @@ vim.diagnostic.config({
   },
   update_in_insert = false,
   underline = true,
+  float = {
+    border = _border
+  },
 })
 
 -- Global mappings.
