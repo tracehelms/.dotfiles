@@ -1,3 +1,4 @@
 .DS_Store
 *.swp
 git/gitconfig.symlink
+*packer_compiled.lua
