@@ -55,7 +55,7 @@ vim.opt.wrap = true             -- wrap lines
 
 -- Use ripgrep
 if vim.fn.executable('rg') == 1 then
-  vim.opt.grepprg = "rg --vimgrep --hidden --no-column"
+  vim.opt.grepprg = "rg --vimgrep --hidden"
 end
 -- Define ripgrep :Find search command
 vim.cmd [[command! -nargs=+ Find execute 'silent grep! <args>' | copen]]

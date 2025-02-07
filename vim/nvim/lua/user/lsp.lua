@@ -3,7 +3,7 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
     "rust_analyzer",
-    "tsserver",
+    "ts_ls",
   }
 })
 
@@ -19,7 +19,7 @@ function My_organize_imports()
 end
 
 -- Set up LSP servers
-require("lspconfig").tsserver.setup {
+require("lspconfig").ts_ls.setup {
   capabilities = capabilities,
   commands = {
     OrganizeImports = {
@@ -48,6 +48,7 @@ require("lspconfig").lua_ls.setup {
 }
 
 -- linting
+vim.env.ESLINT_D_PPID = vim.fn.getpid()
 local lint = require("lint")
 lint.linters_by_ft = {
   javascript = { "eslint_d" },
@@ -79,10 +80,10 @@ require("conform").setup {
     -- lua = { "stylua" },
     -- svelte = { { "prettierd", "prettier" } },
     javascript = { "prettier" },
-    typescript = { { "prettier" } },
-    javascriptreact = { { "prettier" } },
-    typescriptreact = { { "prettier" } },
-    json = { { "prettier" } },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
     -- graphql = { { "prettierd", "prettier" } },
     -- java = { "google-java-format" },
     -- kotlin = { "ktlint" },
@@ -95,8 +96,8 @@ require("conform").setup {
     rust = { "rustfmt" },
     -- yaml = { "yamlfix" },
     -- toml = { "taplo" },
-    css = { { "prettier" } },
-    scss = { { "prettier" } },
+    css = { "prettier" },
+    scss = { "prettier" },
   },
 }
 
