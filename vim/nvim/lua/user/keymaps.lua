@@ -149,9 +149,10 @@ vim.api.nvim_set_keymap("n", "<Leader>ue", "UltiSnipsEdit<CR>", opts)
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<Bslash>', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<Leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<Leader>b', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<Leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<Leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<Leader>fc', builtin.colorscheme, { desc = 'Telescope colorschemes' })
 
 
 
