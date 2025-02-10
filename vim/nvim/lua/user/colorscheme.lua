@@ -1,3 +1,10 @@
+local base16_colorscheme = require('base16-colorscheme')
+base16_colorscheme.with_config({
+  telescope = true,
+  telescope_borders = true,
+  cmp = true,
+})
+
 local colorscheme = "base16-tomorrow-night-eighties"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)

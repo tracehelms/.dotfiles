@@ -28,6 +28,10 @@ vim.opt.title = false           -- dont show a title bar at the top
 vim.opt.undodir = "~/.vim/undo" -- Trace: do I need this?
 vim.opt.wrap = true             -- wrap lines
 
+--Remap comma as leader key
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
+
 -- vim.cmd "set whichwrap+=<,>,[,],h,l"
 -- vim.cmd [[set iskeyword+=-]]
 -- vim.opt.backup = false                          -- creates a backup file
@@ -67,3 +71,6 @@ vim.cmd [[let test#strategy = "neovim"]]
 vim.cmd [[let g:test#neovim#start_normal = 1]]
 -- vim.cmd [[let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']] -- Need this to support name.spec.ts
 -- vim.cmd [[let g:test#javascript#jest#file_pattern = '\v.*spec\.ts$']] -- Need this to support name.spec.ts
+
+-- remap this key before loading plugins
+vim.g.NERDTreeMapOpenExpl = "v"

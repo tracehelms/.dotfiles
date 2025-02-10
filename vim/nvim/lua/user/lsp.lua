@@ -4,6 +4,7 @@ require("mason-lspconfig").setup({
     "lua_ls",
     "rust_analyzer",
     "ts_ls",
+    "gopls",
   }
 })
 
@@ -45,6 +46,9 @@ require("lspconfig").lua_ls.setup {
       telemetry = { enable = false },
     },
   }
+}
+require("lspconfig").gopls.setup {
+  capabilities = capabilities
 }
 
 -- linting
@@ -88,7 +92,7 @@ require("conform").setup {
     -- java = { "google-java-format" },
     -- kotlin = { "ktlint" },
     -- ruby = { "standardrb" },
-    -- markdown = { { "prettierd", "prettier" } },
+    markdown = { "prettier" },
     -- erb = { "htmlbeautifier" },
     -- html = { "htmlbeautifier" },
     -- bash = { "beautysh" },

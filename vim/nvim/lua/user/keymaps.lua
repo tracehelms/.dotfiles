@@ -5,9 +5,6 @@ local term_opts = { silent = true }
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
---Remap comma as leader key
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
 
 -- Modes
 --   normal_mode = "n",
@@ -147,8 +144,16 @@ vim.api.nvim_set_keymap("n", "<Leader>ue", "UltiSnipsEdit<CR>", opts)
 
 
 -- fzf
-vim.keymap.set("n", "<Bslash>", "<cmd>lua require('fzf-lua').files()<CR>", opts)
-vim.keymap.set("n", "<Leader>b", "<cmd>lua require('fzf-lua').buffers()<CR>", opts)
+-- vim.keymap.set("n", "<Bslash>", "<cmd>lua require('fzf-lua').files()<CR>", opts)
+-- vim.keymap.set("n", "<Leader>b", "<cmd>lua require('fzf-lua').buffers()<CR>", opts)
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<Bslash>', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<Leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<Leader>b', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<Leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+
 
 
 
@@ -178,7 +183,6 @@ vim.keymap.set("n", "<leader>yf", ':let @* = expand("%")<CR>', opts) -- Yank fil
 
 
 
-vim.g.NERDTreeMapOpenExpl = "v"
 
 
 

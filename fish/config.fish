@@ -42,6 +42,10 @@ set -x PATH "~/.dotfiles/bin:$PATH"
 # Rust
 set -x PATH "$HOME/.cargo/bin:$PATH"
 
+# Golang
+source ~/.asdf/plugins/golang/set-env.fish
+set -x ASDF_GOLANG_MOD_VERSION_ENABLED true
+
 # Android
 # set -x ANDROID_HOME ~/Library/Android/sdk
 # set -x PATH ${PATH}:${ANDROID_HOME}/tools
@@ -78,6 +82,8 @@ set -x ESLINT_USE_FLAT_CONFIG true
 # Use ripgrep by default with fzf (vim fuzzy file searcher)
 set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 
+# Turn off auto-updating tldr
+set -x TLDR_AUTO_UPDATE_DISABLED 1
 
 
 #####################
