@@ -52,6 +52,10 @@ require("lazy").setup({
     { "tpope/vim-surround" },
     { "tpope/vim-fugitive" },
     { "vim-test/vim-test" },
+    {
+      "startup-nvim/startup.nvim",
+      dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
+    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.

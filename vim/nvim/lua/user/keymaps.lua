@@ -103,8 +103,11 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Insert --
--- Press jk fast to enter
+-- Press jk fast to escape
 -- keymap("i", "jk", "<ESC>", opts)
+
+-- Press nen fast to escape
+keymap("i", "nen", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode

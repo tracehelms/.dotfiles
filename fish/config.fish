@@ -43,8 +43,8 @@ set -x PATH "~/.dotfiles/bin:$PATH"
 set -x PATH "$HOME/.cargo/bin:$PATH"
 
 # Golang
-source ~/.asdf/plugins/golang/set-env.fish
 set -x ASDF_GOLANG_MOD_VERSION_ENABLED true
+source ~/.asdf/plugins/golang/set-env.fish
 
 # Android
 # set -x ANDROID_HOME ~/Library/Android/sdk

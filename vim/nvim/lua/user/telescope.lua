@@ -16,4 +16,10 @@ require('telescope').setup({
     -- other defaults configuration here
   },
   -- other configuration values here
+  pickers = {
+    buffers = {
+      sort_lastused = true,
+      sort_mru = true,
+    },
+  },
 })
