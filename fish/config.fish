@@ -58,8 +58,7 @@ set -x PATH "$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 set -x PATH "$HOME/.serverless/bin:$PATH"
 
 # asdf
-set -x ASDF_DATA_DIR /Users/tracehelms/.asdf
-set -x PATH "$ASDF_DATA_DIR/shims:$PATH"
+# asdf config is in secrets.fish because the path is specific to each device
 
 # Homebrew keg-only installs
 set -x PATH "/opt/homebrew/opt/postgresql@13/bin:$PATH"
