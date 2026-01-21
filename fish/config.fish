@@ -44,7 +44,7 @@ set -x PATH "$HOME/.cargo/bin:$PATH"
 
 # Golang
 set -x ASDF_GOLANG_MOD_VERSION_ENABLED true
-source ~/.asdf/plugins/golang/set-env.fish
+# source ~/.asdf/plugins/golang/set-env.fish
 
 # Android
 # set -x ANDROID_HOME ~/Library/Android/sdk
@@ -58,7 +58,8 @@ set -x PATH "$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 set -x PATH "$HOME/.serverless/bin:$PATH"
 
 # asdf
-source $HOME/.asdf/asdf.fish
+set -x ASDF_DATA_DIR /Users/tracehelms/.asdf
+set -x PATH "$ASDF_DATA_DIR/shims:$PATH"
 
 # Homebrew keg-only installs
 set -x PATH "/opt/homebrew/opt/postgresql@13/bin:$PATH"
