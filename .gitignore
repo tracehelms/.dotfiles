@@ -2,3 +2,4 @@
 *.swp
 git/gitconfig.symlink
 *packer_compiled.lua
+*fish_variables
