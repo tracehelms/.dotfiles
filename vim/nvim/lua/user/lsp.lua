@@ -5,6 +5,7 @@ require("mason-lspconfig").setup({
     "rust_analyzer",
     "ts_ls",
     "gopls",
+    "elixirls",
   }
 })
 

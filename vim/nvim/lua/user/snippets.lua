@@ -1,6 +1,6 @@
 vim.g.UltiSnipsSnippetDirectories = { "~/.dotfiles/vim/UltiSnips" }
 
-vim.g.UltiSnipsExpandTrigger = "<S-Tab>"
+-- vim.g.UltiSnipsExpandTrigger = "<S-Tab>"
 vim.g.UltiSnipsEditSplit = "vertical"
 vim.g.UltiSnipsListSnippets = "<c-s>"
 vim.g.UltiSnipsJumpForwardTrigger = "<c-l>"

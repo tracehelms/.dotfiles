@@ -74,11 +74,11 @@ cmp.setup({
   --   end,
   -- },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm {
+    -- ['<C-e>'] = cmp.mapping.scroll_docs(-4),
+    -- ['<C-n>'] = cmp.mapping.scroll_docs(4),
+    ['<S-Tab>'] = cmp.mapping.complete(), -- TODO this is supposed to show the completion screen, but it's not working atm
+    -- ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm {      -- this setting confirms the selected suggestion OR accepts the first one in the list
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
