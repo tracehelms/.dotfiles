@@ -6,6 +6,7 @@ require "user.colorscheme"
 require "user.cmp"
 require "user.snippets"
 require "user.lsp"
+require "user.treesitter"
 require "user.line"
 require "user.startup"
 

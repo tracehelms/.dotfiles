@@ -1,15 +1,4 @@
 require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "lua_ls",
-    "rust_analyzer",
-    "ts_ls",
-    "gopls",
-    "elixirls",
-  }
-})
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 function My_organize_imports()
   local params = {
@@ -21,23 +10,21 @@ function My_organize_imports()
 end
 
 -- Set up LSP servers
-require("lspconfig").ts_ls.setup {
-  capabilities = capabilities,
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('gopls')
+vim.lsp.enable('elixirls')
+
+vim.lsp.config('ts_ls', {
   commands = {
     OrganizeImports = {
       My_organize_imports,
       description = "Organize Imports"
     }
   },
-  -- on_attach = function(client, bufnr)
-  --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-  -- end
-}
-require("lspconfig").rust_analyzer.setup {
-  capabilities = capabilities
-}
-require("lspconfig").lua_ls.setup {
-  capabilities = capabilities,
+})
+vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {
@@ -47,10 +34,9 @@ require("lspconfig").lua_ls.setup {
       telemetry = { enable = false },
     },
   }
-}
-require("lspconfig").gopls.setup {
-  capabilities = capabilities
-}
+})
+
+
 
 -- linting
 vim.env.ESLINT_D_PPID = vim.fn.getpid()
@@ -140,14 +126,14 @@ end
 
 local _border = "single"
 
--- borders on popus
+-- borders on popups
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover, {
     border = _border
   }
 )
 
--- borders on popus
+-- borders on popups
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help, {
     border = _border

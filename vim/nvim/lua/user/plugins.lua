@@ -43,12 +43,21 @@ require("lazy").setup({
     { "mfussenegger/nvim-lint" },
     { "stevearc/conform.nvim" },
 
+    -- highlighting
+
+    {
+      'nvim-treesitter/nvim-treesitter',
+      branch = "main",
+      lazy = false,
+      build = ':TSUpdate'
+    },
+
     -- other
-    { 'numToStr/Comment.nvim',              opts = {} },
+    { 'numToStr/Comment.nvim',         opts = {} },
     { "preservim/nerdtree" },
-    { "nvim-tree/nvim-web-devicons",        opts = {} },
-    { 'nvim-lualine/lualine.nvim',          dependencies = { 'nvim-tree/nvim-web-devicons' } },
-    { 'nvim-telescope/telescope.nvim',      tag = '0.1.8',                                   dependencies = { 'nvim-lua/plenary.nvim' } },
+    { "nvim-tree/nvim-web-devicons",   opts = {} },
+    { 'nvim-lualine/lualine.nvim',     dependencies = { 'nvim-tree/nvim-web-devicons' } },
+    { 'nvim-telescope/telescope.nvim', tag = 'v0.2.1',                                  dependencies = { 'nvim-lua/plenary.nvim' } },
     { "tpope/vim-surround" },
     { "tpope/vim-fugitive" },
     { "vim-test/vim-test" },
