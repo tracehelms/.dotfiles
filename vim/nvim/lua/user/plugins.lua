@@ -20,7 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    { "nvim-lua/popup.nvim" },   -- An implementation of the Popup API from vim in Neovim
+    -- { "nvim-lua/popup.nvim" },   -- An implementation of the Popup API from vim in Neovim
     { "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
     { "RRethy/base16-nvim" },    -- Lots of base16 colorschemes
 

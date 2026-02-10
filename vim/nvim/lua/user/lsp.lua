@@ -15,6 +15,7 @@ vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('gopls')
 vim.lsp.enable('elixirls')
+vim.lsp.enable('gleam')
 
 vim.lsp.config('ts_ls', {
   commands = {
@@ -124,21 +125,24 @@ for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
-local _border = "single"
+-- local _border = "solid"
 
--- borders on popups
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = _border
-  }
-)
+-- global window border
+vim.o.winborder = 'single'
 
--- borders on popups
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = _border
-  }
-)
+-- -- borders on popups
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+--   vim.lsp.handlers.hover, {
+--     border = _border
+--   }
+-- )
+--
+-- -- borders on popups
+-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+--   vim.lsp.handlers.signature_help, {
+--     border = _border
+--   }
+-- )
 
 vim.diagnostic.config({
   virtual_text = false,
@@ -148,9 +152,9 @@ vim.diagnostic.config({
   },
   update_in_insert = false,
   underline = true,
-  float = {
-    border = _border
-  },
+  -- float = {
+  --   border = _border
+  -- },
 })
 
 -- Global mappings.
