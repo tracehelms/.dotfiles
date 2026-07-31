@@ -24,6 +24,7 @@
   "telescope.nvim": { "branch": "master", "commit": "3333a52ff548ba0a68af6d8da1e54f9cd96e9179" },
   "ultisnips": { "branch": "master", "commit": "b22a86f9dcc5257624bff3c72d8b902eac468aad" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
+  "vim-snippets": { "branch": "master", "commit": "ededcf7581962ee616cadab360d5966f3307f11a" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-test": { "branch": "master", "commit": "8f682546ccb2c44da78719ee318121b0da30d4f3" }
 }

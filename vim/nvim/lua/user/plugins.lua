@@ -34,6 +34,7 @@ require("lazy").setup({
     -- snippets
     { "SirVer/ultisnips" },
     { "quangnguyen30192/cmp-nvim-ultisnips" },
+    { "honza/vim-snippets" },
 
     -- LSP
     { "williamboman/mason.nvim" },
